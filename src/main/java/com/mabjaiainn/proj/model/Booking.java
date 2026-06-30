@@ -50,6 +50,11 @@ public class Booking {
     private BigDecimal advancedPayment;
     private BigDecimal totalPrice;
 
+    public Booking() {
+    }
+
+    
+    
     public Booking(LocalDateTime bookingEnter, LocalDateTime bookingOut, BigDecimal advancedPayment, BigDecimal totalPrice) {
         this.bookingEnter = bookingEnter;
         this.bookingOut = bookingOut;
