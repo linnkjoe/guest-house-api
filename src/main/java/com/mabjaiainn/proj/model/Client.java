@@ -4,10 +4,12 @@
  */
 package com.mabjaiainn.proj.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -15,6 +17,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import java.util.List;
 
 /**
  *
@@ -46,7 +49,27 @@ public class Client {
     @Email(message="Insira um email valido")
     @Size(max=100, message = "O email nao pode ter mais de 100 caracteres")
     private String clientEmail;
+    
+    @OneToMany(mappedBy ="client")
+    @JsonIgnore
+    private List<Booking> booking;
 
+    public Client() {
+    }
+
+    public List<Booking> getBooking() {
+        return booking;
+    }
+    
+    
+
+    public void setBooking(List<Booking> booking) {
+        this.booking = booking;
+    }
+
+    
+    
+    
     public Client(Integer phoneNumber, String clientPassword, String clientFirstName, String clientLastName, String clientEmail) {
         this.phoneNumber = phoneNumber;
         this.clientPassword = clientPassword;
