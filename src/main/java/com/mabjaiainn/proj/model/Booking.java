@@ -27,16 +27,20 @@ public class Booking {
     private Long bookingId;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="client_id", nullable=false)
     @JsonIgnore
     private Client client;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="room_id", nullable=false)
     @JsonIgnore
     private Room room;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="pack_id", nullable=false)
     @JsonIgnore
     private Packs pack;
+    
     
     @NotNull
     private LocalDateTime bookingEnter;

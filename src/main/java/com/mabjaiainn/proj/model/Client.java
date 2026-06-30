@@ -4,6 +4,7 @@
  */
 package com.mabjaiainn.proj.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -34,8 +35,11 @@ public class Client {
     private String clientPassword;
     
     @Size(min=2)
+    @Column(name="client_firstname")
     private String clientFirstName;
     @Size(min=2)
+    
+    @Column(name="client_lastname")
     private String clientLastName;
     
     @NotBlank(message = "O e-mail e obrigatorio")
