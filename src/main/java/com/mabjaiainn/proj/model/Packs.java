@@ -4,6 +4,7 @@
  */
 package com.mabjaiainn.proj.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -26,6 +27,7 @@ public class Packs {
     
     @NotNull(message="A duracao e obrigatoria")
     @Min(value=1, message="Pacotes tem duracao minima duma hora")
+    @Column(name="pack_duration")
     private Integer duration;
     
     @NotNull
