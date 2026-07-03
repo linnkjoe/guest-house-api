@@ -18,10 +18,13 @@ import com.mabjaiainn.proj.repository.ClientRepository;
 import com.mabjaiainn.proj.repository.PacksRepository;
 import com.mabjaiainn.proj.repository.RoomRepository;
 import com.mabjaiainn.proj.service.ClientService;
+import jakarta.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,12 +55,18 @@ public class ClientController {
 }
     
     @DeleteMapping("/clients/{id}")
-    public void deleteById(@PathVariable Long id){
+    public ResponseEntity<Object> deleteById(@PathVariable Long id){
         clientService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
    
-
-
+    @PostMapping("/clients")
+     public ResponseEntity<Client> createClient(@Valid @RequestBody Client client){
+         Client savedClient = clientService.createClient(client);
+         return ResponseEntity.status(HttpStatus.CREATED).body(savedClient);
+     }
+     
+     
     
 }
 

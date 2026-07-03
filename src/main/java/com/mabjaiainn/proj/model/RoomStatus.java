@@ -9,5 +9,5 @@ package com.mabjaiainn.proj.model;
  * @author linnkjoe
  */
 public enum RoomStatus {
-   DISPONIVEL, OUCUPADO, EM_LIMPEZA, EM_MANUTENCAO 
+   DISPONIVEL, OCUPADO, EM_LIMPEZA, EM_MANUTENCAO 
 }
