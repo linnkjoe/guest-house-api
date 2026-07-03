@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mabjaiainn.proj.repository.ClientRepository;
 import com.mabjaiainn.proj.repository.PacksRepository;
 import com.mabjaiainn.proj.repository.RoomRepository;
+import com.mabjaiainn.proj.service.ClientService;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -32,80 +33,29 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @RestController
 public class ClientController {
-    private ClientRepository repository;
-    private PacksRepository packRepository;
-    private RoomRepository roomRepository;
-    private BookingRepository boockingRepository;
+    ClientService clientService;
+
     
-    public ClientController(ClientRepository repository, PacksRepository packRepository, RoomRepository roomRepository, BookingRepository boockingRepository) {
-        this.repository = repository;
-        this.packRepository = packRepository;
-        this.roomRepository = roomRepository;
-        this.boockingRepository = boockingRepository;       
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+               
     }
     
     @GetMapping("/clients")
     public List<Client> retrieveAll(){
-        return repository.findAll();
+        return clientService.retrieveAllClients();
     }
     
     @GetMapping("/clients/{id}")
     public EntityModel<Client> retrieveById(@PathVariable Long id){
-        Optional<Client> client = repository.findById(id);
-
-        if (client.isEmpty()) {
-            throw new SourceNotFound("id:" + id);
-        }
-        EntityModel<Client> entityModel = EntityModel.of(client.get());
-        return entityModel;
+       return clientService.retrieveClientById(id);
 }
     
     @DeleteMapping("/clients/{id}")
     public void deleteById(@PathVariable Long id){
-        repository.deleteById(id);
+        clientService.deleteById(id);
     }
-    
-    @GetMapping("clients/{id}/bookings")
-    public List<Booking> retrieveBookingForUser(@PathVariable Long id){
-        Optional<Client> client = repository.findById(id);
-
-        if (client.isEmpty()) {
-            throw new SourceNotFound("id:" + id);
-        }
-        
-        return client.get().getBooking();
-        
-    }
-    
-    @PostMapping("/client/{clientId}/packs/{packId}/room/{roomId}/bookings")
-    public Booking createBooking(@PathVariable Long clientId,@PathVariable Long packId, 
-            @PathVariable Long roomId , @RequestBody Booking booking){
-        Optional<Client> client = repository.findById(clientId);
-         Optional<Packs> pack = packRepository.findById(packId);
-         Optional<Room> room = roomRepository. findById(roomId);
-         
-        if (client.isEmpty()) {
-            throw new SourceNotFound("id:" + clientId);
-            
-        }
-        
-        if (pack.isEmpty()) {
-            throw new SourceNotFound("id:" + packId);
-            
-        }
-        
-        if (room.isEmpty()) {
-            throw new SourceNotFound("id:" + roomId);
-            
-        }
-        
-      booking.setClient(client.get());
-      booking.setPack(pack.get());
-      booking.setRoom(room.get());
-       boockingRepository.save(booking);
-      
-      return booking;
-    }
+   
 
 
     

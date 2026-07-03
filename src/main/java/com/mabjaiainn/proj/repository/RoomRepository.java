@@ -13,6 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author linnkjoe
  */
 public interface RoomRepository extends JpaRepository<Room, Long>{
-    Room findRoomByStatus(RoomStatus status);
 
 }

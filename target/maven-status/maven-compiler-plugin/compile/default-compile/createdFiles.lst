@@ -1,4 +1,6 @@
 com\mabjaiainn\proj\repository\RoomRepository.class
+com\mabjaiainn\proj\exception\SourceNotFound.class
+com\mabjaiainn\proj\service\RoomService.class
 com\mabjaiainn\proj\model\Client.class
 com\mabjaiainn\proj\model\RoomStatus.class
 com\mabjaiainn\proj\security\SpringSecurityConfiguration.class
@@ -6,11 +8,13 @@ com\mabjaiainn\proj\repository\ClientRepository.class
 com\mabjaiainn\proj\controller\ClientController.class
 com\mabjaiainn\proj\exception\CostumizedResponseEntityExceptionHandler.class
 com\mabjaiainn\proj\exception\ErrorDetails.class
+com\mabjaiainn\proj\service\ClientService.class
 com\mabjaiainn\proj\repository\BookingRepository.class
-com\mabjaiainn\proj\exception\UserNotFoundException.class
+com\mabjaiainn\proj\service\PackService.class
 com\mabjaiainn\proj\model\Room.class
 com\mabjaiainn\proj\repository\PacksRepository.class
 com\mabjaiainn\proj\model\BookingStatus.class
+com\mabjaiainn\proj\service\BookingService.class
 com\mabjaiainn\proj\model\Packs.class
 com\mabjaiainn\proj\ProjApplication.class
 com\mabjaiainn\proj\model\Booking.class
