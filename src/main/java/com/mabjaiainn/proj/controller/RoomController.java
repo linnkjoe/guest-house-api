@@ -41,6 +41,12 @@ public class RoomController {
         return roomService.findRoomById(id);
     }
     
+    @GetMapping("/rooms/avalable")
+    public List<Room> retrieveAvalableRooms(){
+        return roomService.retriveAvalablePacks();
+    }
+
+    
     @DeleteMapping("/rooms/{id}")
     public ResponseEntity<Room> deleteRoom(@PathVariable Long id){
             roomService.deleteById(id);

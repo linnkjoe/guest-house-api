@@ -55,11 +55,9 @@ public class Booking {
 
     
     
-    public Booking(LocalDateTime bookingEnter, LocalDateTime bookingOut, BigDecimal advancedPayment, BigDecimal totalPrice) {
+    public Booking(LocalDateTime bookingEnter) {
         this.bookingEnter = bookingEnter;
-        this.bookingOut = bookingOut;
-        this.advancedPayment = advancedPayment;
-        this.totalPrice = totalPrice;
+       
     }
 
     public Long getBookingId() {

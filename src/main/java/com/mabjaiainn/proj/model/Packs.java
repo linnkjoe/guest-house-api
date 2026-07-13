@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.math.BigDecimal;
 
 /**
  *
@@ -34,14 +35,15 @@ public class Packs {
     private Boolean packAc;
     
     @NotNull(message = "O preco do pacote e obrigatorio")
-    private Double packPrice;
+    @Column(name="pack_price")
+    private BigDecimal packPrice;
 
     public Packs() {
     }
     
     
 
-    public Packs(String packName, Integer duration, Boolean packAc, Double packPrice) {
+    public Packs(String packName, Integer duration, Boolean packAc, BigDecimal packPrice) {
         this.packName = packName;
         this.duration = duration;
         this.packAc = packAc;
@@ -80,11 +82,11 @@ public class Packs {
         this.packAc = packAc;
     }
 
-    public Double getPackPrice() {
+    public BigDecimal getPackPrice() {
         return packPrice;
     }
 
-    public void setPackPrice(Double packPrice) {
+    public void setPackPrice(BigDecimal packPrice) {
         this.packPrice = packPrice;
     }
     

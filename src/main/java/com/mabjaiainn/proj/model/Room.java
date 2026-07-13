@@ -4,12 +4,15 @@
  */
 package com.mabjaiainn.proj.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
+import java.time.Instant;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -27,7 +30,9 @@ public class Room {
 
     @Enumerated(EnumType.STRING)
     private RoomStatus status;
-
+    
+    @Column(name= "data_fim_limpeza")
+    private java.time.LocalDateTime dataFimLimpeza;
     public Room() {
     }
 
@@ -38,6 +43,16 @@ public class Room {
         this.status = status;
     }
 
+    public LocalDateTime getDataFimLimpeza() {
+        return dataFimLimpeza;
+    }
+
+    public void setDataFimLimpeza(LocalDateTime dataFimLimpeza) {
+        this.dataFimLimpeza = dataFimLimpeza;
+    }
+
+    
+    
     public long getRoomId() {
         return roomId;
     }
