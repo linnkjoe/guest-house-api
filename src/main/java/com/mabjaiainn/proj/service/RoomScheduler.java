@@ -38,16 +38,14 @@ public class RoomScheduler {
     public void verifyRealeseRoom(){
         LocalDateTime nowLocal = LocalDateTime.now();
         
-        // 1. Processar quartos que terminaram a estadia
         List<Booking> finishedBookings = bookingRepository.findBookingsTerminados(nowLocal);
         for (Booking booking : finishedBookings){
             Room room = booking.getRoom();
             room.setStatus(RoomStatus.EM_LIMPEZA);
-            room.setDataFimLimpeza(nowLocal.plusMinutes(30)); // Alinhado para LocalDateTime
+            room.setDataFimLimpeza(nowLocal.plusMinutes(30)); 
             roomRepository.save(room);
         }
         
-        // 2. Processar quartos que terminaram a limpeza
         List<Room> roomsToRealese = roomRepository.findRoomsCleanFinished(nowLocal);
         for(Room room : roomsToRealese){
             room.setStatus(RoomStatus.DISPONIVEL);
