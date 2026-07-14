@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -43,6 +44,7 @@ public class Booking {
     
     
     @NotNull
+    @FutureOrPresent(message ="A data de chack-in nao deve estar no passado")
     private LocalDateTime bookingEnter;
     
     private LocalDateTime bookingOut;
