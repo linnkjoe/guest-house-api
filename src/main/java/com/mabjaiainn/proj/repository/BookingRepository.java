@@ -19,8 +19,10 @@ import org.springframework.data.repository.query.Param;
  * @author linnkjoe
  */
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-        List<Booking> findByRoomStatus(RoomStatus status);
-        
-         @Query("SELECT b FROM Booking b WHERE b.room.status = com.mabjaiainn.proj.model.RoomStatus.OCUPADO AND b.bookingOut <= :now")
-    List<Booking> findBookingsTerminados(@Param("now") LocalDateTime now);
+
+
+    List<Booking> findByRoom(Room room);
+    Booking findByBookingId(Long bookingId);
+    
+    
 }

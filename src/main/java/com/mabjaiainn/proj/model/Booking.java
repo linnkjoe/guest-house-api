@@ -6,7 +6,10 @@ package com.mabjaiainn.proj.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -43,16 +46,28 @@ public class Booking {
     private Packs pack;
     
     
+    
     @NotNull
-    @FutureOrPresent(message ="A data de chack-in nao deve estar no passado")
     private LocalDateTime bookingEnter;
     
     private LocalDateTime bookingOut;
     
     private BigDecimal advancedPayment;
     private BigDecimal totalPrice;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name="status")
+    private BookingStatus status;
 
     public Booking() {
+    }
+
+    public BookingStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookingStatus status) {
+        this.status = status;
     }
 
     

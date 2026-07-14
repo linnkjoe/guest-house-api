@@ -9,5 +9,5 @@ package com.mabjaiainn.proj.model;
  * @author linnkjoe
  */
 public enum BookingStatus {
-    PENDENTE, CONFIRMADA, CANCELADA
+    RESERVED, CHECKED_IN, CANCELED, COMPLETED
 }
