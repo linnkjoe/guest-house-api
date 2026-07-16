@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
  */
 public record BookingResponseDTO (
         Long id,
+        Long roomId,
         LocalDateTime bookingEnter,
         LocalDateTime bookingOut,
         Long clientId,
-        Integer roomNumber,
         BookingStatus status,
         BigDecimal advancedPrice,
         BigDecimal totalPrice,

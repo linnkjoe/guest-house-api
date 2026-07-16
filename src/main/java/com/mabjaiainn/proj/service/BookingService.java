@@ -113,10 +113,10 @@ public class BookingService {
 
         return new BookingResponseDTO(
                 savedBooking.getBookingId(),
+                savedBooking.getRoom().getRoomId(),
                 savedBooking.getBookingEnter(),
                 savedBooking.getBookingOut(),
                 savedBooking.getClient().getClientId(),
-                savedBooking.getRoom().getRoomNumber(),
                 savedBooking.getStatus(),
                 savedBooking.getAdvancedPayment(),
                 savedBooking.getTotalPrice(),
@@ -149,10 +149,10 @@ public class BookingService {
         Booking checkedBooking = bookingRepository.saveAndFlush(booking);
         return new BookingResponseDTO(
                 checkedBooking.getBookingId(),
+                checkedBooking.getRoom().getRoomId(),
                 checkedBooking.getBookingEnter(),
                 checkedBooking.getBookingOut(),
                 checkedBooking.getClient().getClientId(),
-                checkedBooking.getRoom().getRoomNumber(),
                 checkedBooking.getStatus(),
                 checkedBooking.getAdvancedPayment(),
                 checkedBooking.getTotalPrice(),
@@ -190,10 +190,10 @@ public class BookingService {
 
         return new BookingResponseDTO(
                 booking.getBookingId(),
+                booking.getRoom().getRoomId(),
                 booking.getBookingEnter(),
                 booking.getBookingOut(),
                 booking.getClient().getClientId(),
-                booking.getRoom().getRoomNumber(),
                 booking.getStatus(),
                 booking.getAdvancedPayment(),
                 booking.getTotalPrice(),
@@ -222,10 +222,10 @@ public class BookingService {
 
         return new BookingResponseDTO(
                 booking.getBookingId(),
+                booking.getRoom().getRoomId(),
                 booking.getBookingEnter(),
                 booking.getBookingOut(),
                 booking.getClient().getClientId(),
-                booking.getRoom().getRoomNumber(),
                 booking.getStatus(),
                 booking.getAdvancedPayment(),
                 booking.getTotalPrice(),
@@ -242,10 +242,10 @@ public class BookingService {
             if (booking.getBookingEnter().isAfter(LocalDateTime.now()) && booking.getStatus() != BookingStatus.CANCELED) {
                 futureBookings.add(new BookingResponseDTO(
                         booking.getBookingId(),
+                        booking.getRoom().getRoomId(),
                         booking.getBookingEnter(),
                         booking.getBookingOut(),
                         booking.getClient().getClientId(),
-                        booking.getRoom().getRoomNumber(),
                         booking.getStatus(),
                         booking.getAdvancedPayment(),
                         booking.getTotalPrice(),
@@ -264,10 +264,10 @@ public class BookingService {
         for (Booking booking : bookings) {
             clientBookings.add(new BookingResponseDTO(
                     booking.getBookingId(),
+                    booking.getBookingId(),
                     booking.getBookingEnter(),
                     booking.getBookingOut(),
                     booking.getClient().getClientId(),
-                    booking.getRoom().getRoomNumber(),
                     booking.getStatus(),
                     booking.getAdvancedPayment(),
                     booking.getTotalPrice(),
@@ -320,10 +320,10 @@ public class BookingService {
              
             return new BookingResponseDTO(
                 booking.getBookingId(),
+                booking.getRoom().getRoomId(),
                 booking.getBookingEnter(),
                 booking.getBookingOut(),
                 booking.getClient().getClientId(),
-                booking.getRoom().getRoomNumber(),
                 booking.getStatus(),
                 booking.getAdvancedPayment(),
                 booking.getTotalPrice(),
@@ -339,10 +339,10 @@ public class BookingService {
         
          return new BookingResponseDTO(
                 booking.getBookingId(),
+                 booking.getRoom().getRoomId(),
                 booking.getBookingEnter(),
                 booking.getBookingOut(),
                 booking.getClient().getClientId(),
-                booking.getRoom().getRoomNumber(),
                 booking.getStatus(),
                 booking.getAdvancedPayment(),
                 booking.getTotalPrice(),
@@ -364,10 +364,10 @@ public class BookingService {
                booking.getStatus() != BookingStatus.COMPLETED){
                 currentBookings.add(new BookingResponseDTO(
                         booking.getBookingId(),
+                        booking.getRoom().getRoomId(),
                         booking.getBookingEnter(),
                         booking.getBookingOut(),
                         booking.getClient().getClientId(),
-                        booking.getRoom().getRoomNumber(),
                         booking.getStatus(),
                         booking.getAdvancedPayment(),
                         booking.getTotalPrice(),
