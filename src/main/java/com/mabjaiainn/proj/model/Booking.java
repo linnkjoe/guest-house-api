@@ -54,6 +54,7 @@ public class Booking {
     
     private BigDecimal advancedPayment;
     private BigDecimal totalPrice;
+    private BigDecimal penalty = BigDecimal.ZERO;
     
     @Enumerated(EnumType.STRING)
     @Column(name="status")
@@ -70,6 +71,15 @@ public class Booking {
         this.status = status;
     }
 
+    public BigDecimal getPenalty() {
+        return penalty;
+    }
+
+    public void setPenalty(BigDecimal multa) {
+        this.penalty = multa;
+    }
+
+    
     
     
     public Booking(LocalDateTime bookingEnter) {

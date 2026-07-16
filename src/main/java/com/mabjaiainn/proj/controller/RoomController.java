@@ -13,8 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,16 +45,9 @@ public class RoomController {
     
     @GetMapping("/rooms/avalable")
     public List<Room> retrieveAvalableRooms(){
-        return roomService.retriveAvalablePacks();
+        return roomService.retriveAvalableRooms();
     }
 
-    
-    @DeleteMapping("/rooms/{id}")
-    public ResponseEntity<Room> deleteRoom(@PathVariable Long id){
-            roomService.deleteById(id);
-        return ResponseEntity.noContent().build();
-              
-    }
     
     @PostMapping("/rooms")
     public ResponseEntity<Room> createRoom(@Valid @RequestBody Room room){
@@ -60,6 +55,31 @@ public class RoomController {
         Room savedRoom = roomService.createRoom(room);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRoom);
         
+    }
+    
+    @PutMapping("/update/room")
+    public Room updateRoom(@Valid @RequestBody Room room){
+        return roomService.updateRoom(room);
+    }
+    
+    @PatchMapping("/{id}/clean")
+    public void startCleaning(@PathVariable Long id){
+        roomService.startCleaning(id);
+    }
+    
+    @PatchMapping("/{id}/avalable")
+    public ResponseEntity<Room> markRoomAsAvalable(@PathVariable Long id){
+        return roomService.markRoomAsAvalable(id);
+    }
+    
+    @PatchMapping("/{id}/maintence")
+    public ResponseEntity<Room> markRoomAsMaintencce(@PathVariable Long id){
+        return roomService.markRoomAsMaintence(id);
+    }
+    
+    @GetMapping("/rooms/ocupied")
+    public List<Room> retrieveOcupiedRooms(){
+        return roomService.getOcupiedRooms();
     }
     
 }

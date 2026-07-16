@@ -40,6 +40,15 @@ public class CostumizedResponseEntityExceptionHandler extends ResponseEntityExce
                         HttpStatus.NOT_FOUND);
         }
         
+        @ExceptionHandler(BusinessException.class)
+        public final ResponseEntity<ErrorDetails> handleUserBusinessException(BusinessException ex,
+                WebRequest request) throws Exception{
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
+                ex.getMessage(), request.getDescription(false));
+                return new ResponseEntity<ErrorDetails>(errorDetails, 
+                        HttpStatus.BAD_REQUEST);
+        }
+        
         @Override
         protected ResponseEntity<Object> handleMethodArgumentNotValid(
                 MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request){

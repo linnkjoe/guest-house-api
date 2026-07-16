@@ -16,6 +16,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,7 +35,7 @@ public class RoomService {
     public EntityModel<Room> findRoomById(Long id) {
         Optional<Room> room = roomRepository.findById(id);
         if (room.isEmpty()) {
-            throw new SourceNotFound("id" + id);
+            throw new SourceNotFound("Room Not Found");
         }
 
         EntityModel<Room> entintyModel = EntityModel.of(room.get());
@@ -45,21 +46,12 @@ public class RoomService {
         return roomRepository.findAll();
     }
 
-    public void deleteById(Long id) {
-        Optional<Room> room = roomRepository.findById(id);
-        if (room.isEmpty()) {
-            throw new SourceNotFound("id" + id);
-        }
-
-        roomRepository.delete(room.get());
-    }
-
     public Room createRoom(Room room) {
 
         return roomRepository.save(room);
     }
 
-    public List<Room> retriveAvalablePacks() {
+    public List<Room> retriveAvalableRooms() {
         return roomRepository.findByStatus(RoomStatus.DISPONIVEL);
     }
 
@@ -70,13 +62,42 @@ public class RoomService {
     }
 
     @Transactional
-    public void startCleaning(Long roomId) {
-        Room room = this.findRoomById(roomId).getContent();
-
+    public ResponseEntity<Room> startCleaning(Long roomId) {
+        Room room = roomRepository.findByRoomId(roomId);
+        if(room == null){
+            throw new SourceNotFound("Room Not Found");
+        }
         room.setStatus(RoomStatus.EM_LIMPEZA);
-
-        room.setDataFimLimpeza(LocalDateTime.now().plusMinutes(30));
-
-        roomRepository.save(room);
+        return ResponseEntity.ok(room);
     }
+
+    @Transactional
+    public ResponseEntity<Room> markRoomAsAvalable(Long roomId) {
+        Room room = findRoomById(roomId).getContent();
+        if (room == null) {
+            throw new SourceNotFound("Room Not Found");
+        }
+
+        room.setStatus(RoomStatus.DISPONIVEL);
+        return ResponseEntity.ok(room);
+    }
+
+    @Transactional
+    public ResponseEntity<Room> markRoomAsMaintence(Long roomId) {
+        Room room = roomRepository.findByRoomId(roomId);
+        if (room == null) {
+            throw new SourceNotFound("Room Not Found");
+        }
+        room.setStatus(RoomStatus.EM_MANUTENCAO);
+        
+        return ResponseEntity.ok(room);
+    }
+    
+    public List<Room> getOcupiedRooms(){
+        return roomRepository.findByStatus(RoomStatus.OCUPADO);
+    }
+    
+    
 }
+
+

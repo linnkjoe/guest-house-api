@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mabjaiainn.proj.repository.ClientRepository;
 import com.mabjaiainn.proj.repository.PacksRepository;
 import com.mabjaiainn.proj.repository.RoomRepository;
+import com.mabjaiainn.proj.service.BookingService;
 import com.mabjaiainn.proj.service.ClientService;
 import jakarta.validation.Valid;
 import java.math.BigDecimal;
@@ -65,6 +66,8 @@ public class ClientController {
          Client savedClient = clientService.createClient(client);
          return ResponseEntity.status(HttpStatus.CREATED).body(savedClient);
      }
+     
+     
      
      
     

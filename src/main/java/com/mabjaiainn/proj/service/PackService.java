@@ -28,7 +28,7 @@ public class PackService {
     public Optional<Packs> findPackById(Long id) {
         Optional<Packs> pack = packsRepository.findById(id);
         if (pack.isEmpty()) {
-            throw new SourceNotFound("id" + id);
+            throw new SourceNotFound("Pack Not Found");
         }
         
         return pack;
@@ -43,7 +43,7 @@ public class PackService {
     public void deleteById(Long id) {
       Optional<Packs> pack = packsRepository.findById(id);
         if (pack.isEmpty()) {
-            throw new SourceNotFound("id" + id);
+            throw new SourceNotFound("Pack Not Found");
         }
         
         packsRepository.deleteById(id);
