@@ -4,6 +4,7 @@
  */
 package com.mabjaiainn.proj.service;
 
+import com.mabjaiainn.proj.DTO.BookingResponseDTO;
 import com.mabjaiainn.proj.exception.SourceNotFound;
 import com.mabjaiainn.proj.model.Booking;
 import com.mabjaiainn.proj.model.Client;
@@ -39,7 +40,7 @@ public class ClientService {
         Optional<Client> client = clientRepository.findById(id);
 
         if (client.isEmpty()) {
-            throw new SourceNotFound("id:" + id);
+            throw new SourceNotFound("Client Not found");
         }
         EntityModel<Client> entityModel = EntityModel.of(client.get());
         return entityModel;
@@ -50,7 +51,7 @@ public class ClientService {
          Optional<Client> client = clientRepository.findById(id);
 
         if (client.isEmpty()) {
-            throw new SourceNotFound("id:" + id);
+            throw new SourceNotFound("Client Not Found");
         }
         clientRepository.deleteById(id);
     }
@@ -59,9 +60,7 @@ public class ClientService {
     
               return clientRepository.save(client);
 
-    }
-
-           
+    }   
         
     }
 

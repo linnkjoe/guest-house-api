@@ -5,6 +5,7 @@
 package com.mabjaiainn.proj.repository;
 
 import com.mabjaiainn.proj.model.Booking;
+import com.mabjaiainn.proj.model.Client;
 import com.mabjaiainn.proj.model.Room;
 import com.mabjaiainn.proj.model.RoomStatus;
 import java.time.Instant;
@@ -19,8 +20,12 @@ import org.springframework.data.repository.query.Param;
  * @author linnkjoe
  */
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-        List<Booking> findByRoomStatus(RoomStatus status);
-        
-         @Query("SELECT b FROM Booking b WHERE b.room.status = com.mabjaiainn.proj.model.RoomStatus.OCUPADO AND b.bookingOut <= :now")
-    List<Booking> findBookingsTerminados(@Param("now") LocalDateTime now);
+
+
+    List<Booking> findByRoom(Room room);
+    Booking findByBookingId(Long bookingId);
+    List<Booking> findByClient(Client client);
+    
+    List<Booking> findBookingEnterBetween(LocalDateTime start, LocalDateTime end);
+    
 }

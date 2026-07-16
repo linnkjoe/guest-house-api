@@ -19,7 +19,8 @@ import org.springframework.data.repository.query.Param;
  */
 public interface RoomRepository extends JpaRepository<Room, Long>{
     List<Room> findByStatus(RoomStatus status);
+    Room findByRoomId(Long roomId);
     
-    @Query("SELECT r FROM Room r WHERE r.status = com.mabjaiainn.proj.model.RoomStatus.EM_LIMPEZA AND r.dataFimLimpeza <= :now")
-    List<Room> findRoomsCleanFinished(@Param("now") LocalDateTime now);
+    
+    
 }
