@@ -101,14 +101,6 @@ Unit tests are being implemented using:
 - JUnit 5 for test execution and assertions.
 - Mockito for mocking dependencies and isolating business logic.
 
-🎯 Roadmap
-
-- ✅ Complete unit tests
-- 🔒 Spring Security
-- 🔑 JWT Authentication
-- 📄 Swagger / OpenAPI Documentation
-- 🐳 Docker
-- ☁️ AWS Deployment
 
 👨‍💻 Author
 
