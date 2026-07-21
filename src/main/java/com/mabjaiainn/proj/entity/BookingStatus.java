@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
  */
-package com.mabjaiainn.proj.model;
+package com.mabjaiainn.proj.entity;
 
 /**
  *
  * @author linnkjoe
  */
-public enum RoomStatus {
-   DISPONIVEL, OCUPADO, EM_LIMPEZA, EM_MANUTENCAO, RESERVADO 
+public enum BookingStatus {
+    RESERVED, CHECKED_IN, CANCELED, COMPLETED
 }

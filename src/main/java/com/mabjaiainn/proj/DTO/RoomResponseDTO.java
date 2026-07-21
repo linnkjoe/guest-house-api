@@ -4,8 +4,8 @@
  */
 package com.mabjaiainn.proj.DTO;
 
-import com.mabjaiainn.proj.model.BookingStatus;
-import com.mabjaiainn.proj.model.RoomStatus;
+import com.mabjaiainn.proj.entity.BookingStatus;
+import com.mabjaiainn.proj.entity.RoomStatus;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

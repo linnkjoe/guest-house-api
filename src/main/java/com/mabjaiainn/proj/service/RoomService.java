@@ -5,9 +5,9 @@
 package com.mabjaiainn.proj.service;
 
 import com.mabjaiainn.proj.exception.SourceNotFound;
-import com.mabjaiainn.proj.model.Packs;
-import com.mabjaiainn.proj.model.Room;
-import com.mabjaiainn.proj.model.RoomStatus;
+import com.mabjaiainn.proj.entity.Packs;
+import com.mabjaiainn.proj.entity.Room;
+import com.mabjaiainn.proj.entity.RoomStatus;
 import com.mabjaiainn.proj.repository.RoomRepository;
 import jakarta.transaction.Transactional;
 import java.time.Instant;

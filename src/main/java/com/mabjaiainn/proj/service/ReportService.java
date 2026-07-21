@@ -5,7 +5,7 @@
 package com.mabjaiainn.proj.service;
 
 import com.mabjaiainn.proj.DTO.MonthlyRevenueReportDTO;
-import com.mabjaiainn.proj.model.Booking;
+import com.mabjaiainn.proj.entity.Booking;
 import com.mabjaiainn.proj.repository.BookingRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -34,7 +34,7 @@ public class ReportService {
         LocalDateTime endOfMonth = startOfMonth.with(TemporalAdjusters.lastDayOfMonth())
                 .withHour(23).withMinute(59).withSecond(59);
         
-        List<Booking> bookings = bookingRepository.findBookingEnterBetween(startOfMonth, endOfMonth);
+        List<Booking> bookings = bookingRepository.findBookingByBookingEnterBetween(startOfMonth, endOfMonth);
      
         BigDecimal totalReveneu = bookings.stream().map(Booking::getTotalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

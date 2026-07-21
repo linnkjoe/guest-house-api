@@ -4,7 +4,7 @@
  */
 package com.mabjaiainn.proj.repository;
 
-import com.mabjaiainn.proj.model.Client;
+import com.mabjaiainn.proj.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

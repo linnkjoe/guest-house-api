@@ -4,10 +4,10 @@
  */
 package com.mabjaiainn.proj.repository;
 
-import com.mabjaiainn.proj.model.Booking;
-import com.mabjaiainn.proj.model.Client;
-import com.mabjaiainn.proj.model.Room;
-import com.mabjaiainn.proj.model.RoomStatus;
+import com.mabjaiainn.proj.entity.Booking;
+import com.mabjaiainn.proj.entity.Client;
+import com.mabjaiainn.proj.entity.Room;
+import com.mabjaiainn.proj.entity.RoomStatus;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,11 +21,12 @@ import org.springframework.data.repository.query.Param;
  */
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-
     List<Booking> findByRoom(Room room);
+
     Booking findByBookingId(Long bookingId);
+
     List<Booking> findByClient(Client client);
-    
-    List<Booking> findBookingEnterBetween(LocalDateTime start, LocalDateTime end);
-    
+
+    List<Booking> findBookingByBookingEnterBetween(LocalDateTime bookingEnter, LocalDateTime bookingOut);
+
 }

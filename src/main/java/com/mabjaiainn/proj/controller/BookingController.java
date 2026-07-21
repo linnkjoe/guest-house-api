@@ -5,7 +5,7 @@
 package com.mabjaiainn.proj.controller;
 
 import com.mabjaiainn.proj.exception.BusinessException;
-import com.mabjaiainn.proj.model.Booking;
+import com.mabjaiainn.proj.entity.Booking;
 import com.mabjaiainn.proj.DTO.BookingResponseDTO;
 import com.mabjaiainn.proj.service.BookingService;
 import jakarta.validation.Valid;

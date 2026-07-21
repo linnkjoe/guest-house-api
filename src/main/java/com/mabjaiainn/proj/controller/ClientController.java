@@ -5,12 +5,12 @@
 package com.mabjaiainn.proj.controller;
 
 import com.mabjaiainn.proj.exception.SourceNotFound;
-import com.mabjaiainn.proj.model.Booking;
+import com.mabjaiainn.proj.entity.Booking;
 import java.util.List;
 
-import com.mabjaiainn.proj.model.Client;
-import com.mabjaiainn.proj.model.Packs;
-import com.mabjaiainn.proj.model.Room;
+import com.mabjaiainn.proj.entity.Client;
+import com.mabjaiainn.proj.entity.Packs;
+import com.mabjaiainn.proj.entity.Room;
 import com.mabjaiainn.proj.repository.BookingRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -4,8 +4,8 @@
  */
 package com.mabjaiainn.proj.controller;
 
-import com.mabjaiainn.proj.model.Client;
-import com.mabjaiainn.proj.model.Packs;
+import com.mabjaiainn.proj.entity.Client;
+import com.mabjaiainn.proj.entity.Packs;
 import com.mabjaiainn.proj.repository.PacksRepository;
 import com.mabjaiainn.proj.service.PackService;
 import jakarta.validation.Valid;

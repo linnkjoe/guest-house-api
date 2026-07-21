@@ -4,8 +4,8 @@
  */
 package com.mabjaiainn.proj.repository;
 
-import com.mabjaiainn.proj.model.Room;
-import com.mabjaiainn.proj.model.RoomStatus;
+import com.mabjaiainn.proj.entity.Room;
+import com.mabjaiainn.proj.entity.RoomStatus;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;

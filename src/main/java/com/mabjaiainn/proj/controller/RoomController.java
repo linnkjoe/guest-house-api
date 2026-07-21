@@ -4,7 +4,7 @@
  */
 package com.mabjaiainn.proj.controller;
 
-import com.mabjaiainn.proj.model.Room;
+import com.mabjaiainn.proj.entity.Room;
 import com.mabjaiainn.proj.service.RoomService;
 import jakarta.validation.Valid;
 import java.util.List;

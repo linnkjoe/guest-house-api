@@ -5,8 +5,8 @@
 package com.mabjaiainn.proj.service;
 
 import com.mabjaiainn.proj.exception.SourceNotFound;
-import com.mabjaiainn.proj.model.Packs;
-import com.mabjaiainn.proj.model.Room;
+import com.mabjaiainn.proj.entity.Packs;
+import com.mabjaiainn.proj.entity.Room;
 import com.mabjaiainn.proj.repository.PacksRepository;
 import java.util.List;
 import java.util.Optional;
