@@ -5,7 +5,7 @@
 ![Oracle](https://img.shields.io/badge/Database-Oracle-red)
 ![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green)
 ![JUnit5](https://img.shields.io/badge/JUnit-5-success)
-![Mockito]n(https://img.shields.io/badge/Mockito-Test-blue)
+![Mockito](https://img.shields.io/badge/Mockito-Test-blue)
 ![Maven](https://img.shields.io/badge/Maven-Build-red)
 
 A RESTful API for managing a Guest House, built with **Java 26** and **Spring Boot**. This project provides a backend solution for managing guests, rooms, accommodation packages, and bookings while enforcing business rules for room availability, check-in, check-out, and cleaning periods.
