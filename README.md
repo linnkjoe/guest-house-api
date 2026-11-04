@@ -1,4 +1,4 @@
-# 🏨 Guest House API (Mabjaia Inn)
+# 🏨 Motel API (Mabjaia Inn)
 
 A RESTful API for complete management of the **Mabjaia Inn** Guest House, built with **Java 26** and **Spring Boot**. The solution provides advanced features for customer and room management, static and custom accommodation packages, business rules for check-in/check-out, automated cleaning and expiration workflows, an internal message/support channel, JWT authentication, Google OAuth 2.0 integration, and email verification via SMTP.
 
