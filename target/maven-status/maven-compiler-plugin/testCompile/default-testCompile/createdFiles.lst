@@ -1,2 +1,9 @@
-com\mabjaiainn\proj\service\BookingServiceTest.class
+com\mabjaiainn\proj\service\PricingServiceTest.class
+com\mabjaiainn\proj\service\RoomServiceTest.class
 com\mabjaiainn\proj\ProjApplicationTests.class
+com\mabjaiainn\proj\service\ClientServiceTest.class
+com\mabjaiainn\proj\service\BookingServiceTest.class
+com\mabjaiainn\proj\service\ContactMessageServiceTest.class
+com\mabjaiainn\proj\service\AuthServiceTest.class
+com\mabjaiainn\proj\service\UserServiceTest.class
+com\mabjaiainn\proj\service\RoomSchedulerTest.class

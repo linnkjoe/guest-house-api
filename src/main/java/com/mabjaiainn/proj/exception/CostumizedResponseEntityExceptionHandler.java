@@ -9,6 +9,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,6 +31,25 @@ public class CostumizedResponseEntityExceptionHandler extends ResponseEntityExce
                 ex.getMessage(), request.getDescription(false));
                 return new ResponseEntity<ErrorDetails>(errorDetails, 
                         HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        // Sem isto, o handler generico acima transformaria 403/401 em 500.
+        @ExceptionHandler(AccessDeniedException.class)
+        public final ResponseEntity<ErrorDetails> handleAccessDenied(Exception ex,
+                WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
+                "Sem permissao para esta acao", request.getDescription(false));
+                return new ResponseEntity<ErrorDetails>(errorDetails,
+                        HttpStatus.FORBIDDEN);
+        }
+
+        @ExceptionHandler(AuthenticationException.class)
+        public final ResponseEntity<ErrorDetails> handleAuthentication(Exception ex,
+                WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
+                "Credenciais invalidas", request.getDescription(false));
+                return new ResponseEntity<ErrorDetails>(errorDetails,
+                        HttpStatus.UNAUTHORIZED);
         }
 
         @ExceptionHandler(SourceNotFound.class)

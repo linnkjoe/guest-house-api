@@ -5,6 +5,7 @@
 package com.mabjaiainn.proj.repository;
 
 import com.mabjaiainn.proj.entity.Booking;
+import com.mabjaiainn.proj.entity.BookingStatus;
 import com.mabjaiainn.proj.entity.Client;
 import com.mabjaiainn.proj.entity.Room;
 import com.mabjaiainn.proj.entity.RoomStatus;
@@ -26,6 +27,15 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     Booking findByBookingId(Long bookingId);
 
     List<Booking> findByClient(Client client);
+
+    List<Booking> findByStatus(BookingStatus status);
+
+    List<Booking> findByStatusAndBookingOutLessThanEqual(BookingStatus status, LocalDateTime bookingOut);
+
+    List<Booking> findByStatusAndBookingEnterGreaterThanAndBookingOutGreaterThan(
+            BookingStatus status, LocalDateTime bookingEnter, LocalDateTime bookingOut);
+
+    boolean existsByBookingIdAndClient_ClientId(Long bookingId, Long clientId);
 
     List<Booking> findBookingByBookingEnterBetween(LocalDateTime bookingEnter, LocalDateTime bookingOut);
 

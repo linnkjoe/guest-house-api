@@ -35,7 +35,8 @@ public class Client {
     @Max(value=999999999, message= "O numero deve ter no maximo 9 algarismos")
     private Integer phoneNumber;
     
-    @Size(min=8)
+    @NotBlank(message = "A palavra-passe e obrigatoria")
+    @Size(min=8, max=72, message = "A palavra-passe deve ter entre 8 e 72 caracteres")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String clientPassword;
     

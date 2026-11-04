@@ -1,30 +1,96 @@
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\BookingController.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\ClientController.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\PacksController.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\ReportController.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\RoomController.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\BookingResponseDTO.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\MonthlyRevenueReportDTO.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\RoomResponseDTO.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\Booking.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\BookingStatus.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\Client.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\Packs.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\Room.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\RoomStatus.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\exception\BusinessException.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\exception\CostumizedResponseEntityExceptionHandler.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\exception\ErrorDetails.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\exception\SourceNotFound.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\ProjApplication.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\BookingRepository.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\ClientRepository.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\PacksRepository.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\RoomRepository.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\security\SpringSecurityConfiguration.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\BookingService.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\ClientService.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\PackService.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\ReportService.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\RoomScheduler.java
-E:\Spring Boot\projects\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\RoomService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\AboutPageController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\AuthController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\BookingController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\ClientController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\ContactMessageController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\CustomPackController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\PackFeatureController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\PacksController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\ReportController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\RoomController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\controller\UserController.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\AboutPageRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\AuthUserDetails.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\BookingRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\BookingResponseDTO.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\ChangePasswordRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\ClientResponseDTO.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\ContactMessageReplyResponse.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\ContactMessageRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\ContactMessageResponse.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\ContactReplyRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\CreateClientRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\CreateClientResponse.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\CreateUserRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\CreateUserResponse.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\CustomBookingRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\CustomPackRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\CustomPackResponse.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\EmailAvailability.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\FeatureRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\LoginRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\LoginResponse.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\MonthlyRevenueReportDTO.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\PackRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\QuoteRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\QuoteResponse.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\RegisterRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\RoomResponseDTO.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\SetClientEnabledRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\SetUserEnabledRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\UserResponseDTO.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\AboutPageContent.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\AboutPageImage.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\AppUser.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\Booking.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\BookingStatus.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\Client.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\ContactMessage.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\ContactMessageReply.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\CustomPackage.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\PackFeature.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\PackImage.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\Packs.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\PaymentMethod.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\PaymentStatus.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\Role.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\Room.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\RoomStatus.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\exception\BusinessException.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\exception\CostumizedResponseEntityExceptionHandler.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\exception\ErrorDetails.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\exception\SourceNotFound.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\ProjApplication.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\AboutPageContentRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\AboutPageImageRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\AppUserRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\BookingRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\ClientRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\ContactMessageReplyRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\ContactMessageRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\CustomPackageRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\PackFeatureRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\PackImageRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\PacksRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\repository\RoomRepository.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\security\AccessGuard.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\security\CatalogDataInitializer.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\security\JwtConfiguration.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\security\OpenApiConfiguration.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\security\SecurityDataInitializer.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\security\SpringSecurityConfiguration.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\security\TeamUsername.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\AboutPageService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\AuthService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\BookingService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\ClientService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\ContactMessageService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\CustomPackService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\PackFeatureService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\PackService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\PricingService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\ReportService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\RoomScheduler.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\RoomService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\TemporaryPasswordGenerator.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\UserService.java

@@ -65,7 +65,7 @@ public class Room {
         return roomNumber;
     }
 
-    public void setRoomNumber(int room_number) {
+    public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
 

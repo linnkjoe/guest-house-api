@@ -10,22 +10,18 @@ import com.mabjaiainn.proj.exception.SourceNotFound;
 import com.mabjaiainn.proj.entity.Booking;
 import com.mabjaiainn.proj.entity.BookingStatus;
 import com.mabjaiainn.proj.entity.Client;
+import com.mabjaiainn.proj.entity.PaymentMethod;
+import com.mabjaiainn.proj.entity.PaymentStatus;
 import com.mabjaiainn.proj.entity.Packs;
 import com.mabjaiainn.proj.entity.Room;
 import com.mabjaiainn.proj.entity.RoomStatus;
 import com.mabjaiainn.proj.repository.BookingRepository;
-import com.mabjaiainn.proj.repository.ClientRepository;
-import com.mabjaiainn.proj.repository.PacksRepository;
-import com.mabjaiainn.proj.repository.RoomRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 
 /**
@@ -39,12 +35,15 @@ public class BookingService {
     private PackService packService;
     private RoomService roomService;
     private ClientService clientService;
+    private PricingService pricingService;
 
-    public BookingService(BookingRepository bookingRepository, PackService packService, RoomService roomService, ClientService clientService) {
+    public BookingService(BookingRepository bookingRepository, PackService packService, RoomService roomService,
+            ClientService clientService, PricingService pricingService) {
         this.bookingRepository = bookingRepository;
         this.packService = packService;
         this.roomService = roomService;
         this.clientService = clientService;
+        this.pricingService = pricingService;
     }
 
     @Transactional
@@ -52,18 +51,29 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
-    public List<Booking> retrieveAllBookings() {
-        return bookingRepository.findAll();
+    @Transactional
+    public List<BookingResponseDTO> retrieveAllBookings() {
+        return bookingRepository.findAll().stream().map(this::toResponse).toList();
     }
 
     public Room findAvalableRoom(LocalDateTime checkIn, LocalDateTime checkout) {
-       List<Room> rooms = roomService.retrieveAllRooms();
+       List<Room> rooms = roomService.findReservableRoomsForBooking();
 
         for (Room room : rooms) {
+            if (room.getStatus() != RoomStatus.DISPONIVEL
+                    && room.getStatus() != RoomStatus.RESERVADO
+                    && room.getStatus() != RoomStatus.OCUPADO) {
+                continue;
+            }
             List<Booking> bookings = bookingRepository.findByRoom(room);
             boolean hasConflict = false;
 
             for (Booking booking : bookings) {
+                if (booking.getStatus() == BookingStatus.CANCELED
+                                || booking.getStatus() == BookingStatus.EXPIRED
+                                || booking.getStatus() == BookingStatus.COMPLETED) {
+                    continue;
+                }
                 if (checkIn.isBefore(booking.getBookingOut())
                         && checkout.isAfter(booking.getBookingEnter())) {
                     hasConflict = true;
@@ -79,6 +89,12 @@ public class BookingService {
 
     @Transactional
     public BookingResponseDTO createBookingForClient(Booking booking, Long clientId, Long packId) throws BusinessException {
+        return createBookingForClient(booking, clientId, packId, null);
+    }
+
+    @Transactional
+    public BookingResponseDTO createBookingForClient(Booking booking, Long clientId, Long packId,
+            PaymentMethod paymentMethod) throws BusinessException {
 
         Client client = clientService.retrieveClientById(clientId).getContent();
 
@@ -102,27 +118,23 @@ public class BookingService {
         if (room == null) {
             throw new BusinessException("Not avalable Rooms for the providede time");
         }
-        booking.setRoom(room);
+        Room bookingRoom = room.getStatus() == RoomStatus.OCUPADO
+                ? room
+                : roomService.reserveRoom(room.getRoomId());
+        booking.setRoom(bookingRoom);
         booking.setClient(client);
-        booking.setAdvancedPayment(pack.getPackPrice().divide(BigDecimal.valueOf(2)));
-        booking.setTotalPrice(pack.getPackPrice());
+        booking.setPack(pack);
+        BigDecimal bookingPrice = pack.getDiscountedPrice();
+        booking.setAdvancedPayment(bookingPrice.divide(BigDecimal.valueOf(2), RoundingMode.HALF_UP));
+        booking.setTotalPrice(bookingPrice);
+        booking.setPaymentMethod(paymentMethod);
+        booking.setPaymentStatus(paymentMethod == null ? PaymentStatus.NOT_REQUIRED : PaymentStatus.PAID);
         booking.setBookingOut(checkOut);
         booking.setStatus(BookingStatus.RESERVED);
 
         Booking savedBooking = bookingRepository.save(booking);
-
-        return new BookingResponseDTO(
-                savedBooking.getBookingId(),
-                savedBooking.getRoom().getRoomId(),
-                savedBooking.getBookingEnter(),
-                savedBooking.getBookingOut(),
-                savedBooking.getClient().getClientId(),
-                savedBooking.getStatus(),
-                savedBooking.getAdvancedPayment(),
-                savedBooking.getTotalPrice(),
-                savedBooking.getPenalty()
-        );
-
+        packService.recordRequest(packId);
+        return toResponse(savedBooking);
     }
 
     @Transactional
@@ -144,21 +156,17 @@ public class BookingService {
             throw new BusinessException("Booking Expired");
         }
 
+        boolean anotherGuestStillCheckedIn = bookingRepository.findByRoom(booking.getRoom()).stream()
+                .anyMatch(other -> other != booking && other.getStatus() == BookingStatus.CHECKED_IN);
+        if (anotherGuestStillCheckedIn) {
+            throw new BusinessException("The room is still occupied by another booking");
+        }
+
         booking.setStatus(BookingStatus.CHECKED_IN);
         booking.getRoom().setStatus(RoomStatus.OCUPADO);
+        booking.getRoom().setDataFimLimpeza(null);
         Booking checkedBooking = bookingRepository.saveAndFlush(booking);
-        return new BookingResponseDTO(
-                checkedBooking.getBookingId(),
-                checkedBooking.getRoom().getRoomId(),
-                checkedBooking.getBookingEnter(),
-                checkedBooking.getBookingOut(),
-                checkedBooking.getClient().getClientId(),
-                checkedBooking.getStatus(),
-                checkedBooking.getAdvancedPayment(),
-                checkedBooking.getTotalPrice(),
-                checkedBooking.getPenalty()
-        );
-
+        return toResponse(checkedBooking);
     }
 
     public BigDecimal penalty(Booking booking) {
@@ -187,18 +195,9 @@ public class BookingService {
         booking.setPenalty(penalty(booking));
         booking.setStatus(BookingStatus.COMPLETED);
         booking.getRoom().setStatus(RoomStatus.EM_LIMPEZA);
+        booking.getRoom().setDataFimLimpeza(LocalDateTime.now().plusMinutes(30));
 
-        return new BookingResponseDTO(
-                booking.getBookingId(),
-                booking.getRoom().getRoomId(),
-                booking.getBookingEnter(),
-                booking.getBookingOut(),
-                booking.getClient().getClientId(),
-                booking.getStatus(),
-                booking.getAdvancedPayment(),
-                booking.getTotalPrice(),
-                booking.getPenalty()
-        );
+        return toResponse(booking);
     }
 
     @Transactional
@@ -219,137 +218,87 @@ public class BookingService {
 
         booking.setPenalty(penalty(booking));
         booking.setStatus(BookingStatus.CANCELED);
-
-        return new BookingResponseDTO(
-                booking.getBookingId(),
-                booking.getRoom().getRoomId(),
-                booking.getBookingEnter(),
-                booking.getBookingOut(),
-                booking.getClient().getClientId(),
-                booking.getStatus(),
-                booking.getAdvancedPayment(),
-                booking.getTotalPrice(),
-                booking.getPenalty()
-        );
-
-    }
-
-    public List<BookingResponseDTO> getFutureBooking() {
-        List<Booking> bookings = retrieveAllBookings();
-        List<BookingResponseDTO> futureBookings = new java.util.ArrayList<>();
-
-        for (Booking booking : bookings) {
-            if (booking.getBookingEnter().isAfter(LocalDateTime.now()) && booking.getStatus() != BookingStatus.CANCELED) {
-                futureBookings.add(new BookingResponseDTO(
-                        booking.getBookingId(),
-                        booking.getRoom().getRoomId(),
-                        booking.getBookingEnter(),
-                        booking.getBookingOut(),
-                        booking.getClient().getClientId(),
-                        booking.getStatus(),
-                        booking.getAdvancedPayment(),
-                        booking.getTotalPrice(),
-                        booking.getPenalty()));
-
+        if (booking.getRoom().getStatus() == RoomStatus.RESERVADO) {
+            boolean hasOtherActiveBookings = bookingRepository.findByRoom(booking.getRoom()).stream()
+                    .anyMatch(other -> !other.getBookingId().equals(bookingId)
+                            && (other.getStatus() == BookingStatus.RESERVED
+                            || other.getStatus() == BookingStatus.CHECKED_IN));
+            if (!hasOtherActiveBookings) {
+                booking.getRoom().setStatus(RoomStatus.DISPONIVEL);
             }
         }
-        return futureBookings;
+
+        return toResponse(booking);
+
     }
 
+    @Transactional
+    public List<BookingResponseDTO> getFutureBooking() {
+        LocalDateTime now = LocalDateTime.now();
+        return bookingRepository.findAll().stream()
+                .filter(booking -> booking.getBookingEnter().isAfter(now)
+                        && booking.getStatus() != BookingStatus.CANCELED
+                        && booking.getStatus() != BookingStatus.EXPIRED)
+                .map(this::toResponse)
+                .toList();
+    }
+
+    @Transactional
     public List<BookingResponseDTO> getBookingHistoryByGuest(Long id) {
         Client client = clientService.retrieveClientById(id).getContent();
         List<Booking> bookings = bookingRepository.findByClient(client);
 
         List<BookingResponseDTO> clientBookings = new java.util.ArrayList<>();
         for (Booking booking : bookings) {
-            clientBookings.add(new BookingResponseDTO(
-                    booking.getBookingId(),
-                    booking.getBookingId(),
-                    booking.getBookingEnter(),
-                    booking.getBookingOut(),
-                    booking.getClient().getClientId(),
-                    booking.getStatus(),
-                    booking.getAdvancedPayment(),
-                    booking.getTotalPrice(),
-                    booking.getPenalty()));
+            clientBookings.add(toResponse(booking));
 
         }
         return clientBookings;
     }  
     
     @Transactional
-    public BookingResponseDTO extendBooking(Long bookingId, LocalDateTime newCheckOut) throws BusinessException{
+    public BookingResponseDTO extendBooking(Long bookingId, LocalDateTime newCheckOut) throws BusinessException {
         Booking booking = bookingRepository.findByBookingId(bookingId);
-        if(booking == null){
+        if (booking == null) {
             throw new SourceNotFound("Booking Not Found");
         }
-         Room currentRoom = booking.getRoom();
-        
-         LocalDateTime oldCheckOut = booking.getBookingOut();
-         
-         if(newCheckOut.isBefore(oldCheckOut)){
-             throw new BusinessException("The new check-ou date must be after the actual check-out");
-         }
-         
-         if(booking.getStatus()!=BookingStatus.CHECKED_IN && booking.getStatus()!=BookingStatus.RESERVED){
-             throw new BusinessException("Unable to extend Unchecked-in or Unreserved bookings");
-         }
-         
-        List<Booking> otherBookings = bookingRepository.findByRoom(currentRoom);
-            for(Booking other:otherBookings){
-                if(other.getBookingId().equals(bookingId)){
-                continue;
-                }
-            
-                if(oldCheckOut.isBefore(other.getBookingOut()) && newCheckOut.isAfter(other.getBookingEnter())){
-                    throw new BusinessException("Cannot extend, the room is reserved by Another Client");
-                }
-            }
-            
-            Duration extensionDuration = Duration.between(oldCheckOut, newCheckOut);
-            BigDecimal extensionMinutes = BigDecimal.valueOf(extensionDuration.toMinutes());
-            BigDecimal extensionHours = extensionMinutes.divide(BigDecimal.valueOf(60), 2, RoundingMode.HALF_UP);
+        Room currentRoom = booking.getRoom();
+        LocalDateTime oldCheckOut = booking.getBookingOut();
 
-            BigDecimal hourlyRate = BigDecimal.valueOf(500);
-            BigDecimal aditionalPrice = extensionHours.multiply(hourlyRate);
-            BigDecimal currentPrice = booking.getTotalPrice();
-            BigDecimal newTotalPice = currentPrice.add(aditionalPrice);
-            
-            booking.setBookingOut(newCheckOut);
-            booking.setTotalPrice(newTotalPice);
-             
-            return new BookingResponseDTO(
-                booking.getBookingId(),
-                booking.getRoom().getRoomId(),
-                booking.getBookingEnter(),
-                booking.getBookingOut(),
-                booking.getClient().getClientId(),
-                booking.getStatus(),
-                booking.getAdvancedPayment(),
-                booking.getTotalPrice(),
-                booking.getPenalty()
-        );
+        if (!newCheckOut.isAfter(oldCheckOut)) {
+            throw new BusinessException("The new check-ou date must be after the actual check-out");
         }
-    
-    public BookingResponseDTO getBookingById(Long id) throws BusinessException{
+
+        if (booking.getStatus() != BookingStatus.CHECKED_IN && booking.getStatus() != BookingStatus.RESERVED) {
+            throw new BusinessException("Unable to extend Unchecked-in or Unreserved bookings");
+        }
+
+        boolean hasConflict = bookingRepository.findByRoom(currentRoom).stream()
+                .filter(other -> !other.getBookingId().equals(bookingId))
+                .filter(other -> other.getStatus() == BookingStatus.RESERVED
+                        || other.getStatus() == BookingStatus.CHECKED_IN)
+                .anyMatch(other -> newCheckOut.isAfter(other.getBookingEnter())
+                        && oldCheckOut.isBefore(other.getBookingOut()));
+        if (hasConflict) {
+            throw new BusinessException("Cannot extend, the room is reserved by another client");
+        }
+
+        booking.setBookingOut(newCheckOut);
+        booking.setTotalPrice(booking.getTotalPrice().add(
+                pricingService.extensionPrice(Duration.between(oldCheckOut, newCheckOut))));
+        return toResponse(booking);
+    }
+
+    @Transactional
+    public BookingResponseDTO getBookingById(Long id) throws BusinessException {
         Booking booking = bookingRepository.findByBookingId(id);
-        if(booking == null){
+        if (booking == null) {
             throw new BusinessException("Booking not Found");
         }
-        
-         return new BookingResponseDTO(
-                booking.getBookingId(),
-                 booking.getRoom().getRoomId(),
-                booking.getBookingEnter(),
-                booking.getBookingOut(),
-                booking.getClient().getClientId(),
-                booking.getStatus(),
-                booking.getAdvancedPayment(),
-                booking.getTotalPrice(),
-                booking.getPenalty()
-        );   
+        return toResponse(booking);
     }
     
+    @Transactional
     public List<BookingResponseDTO> getCurrentBooking(Long id){
         Client client = clientService.retrieveClientById(id).getContent();
         if(client==null){
@@ -360,23 +309,29 @@ public class BookingService {
         List<BookingResponseDTO> currentBookings = new java.util.ArrayList<>();
         
         for(Booking booking : allBookings){
-            if(booking.getStatus() != BookingStatus.CANCELED && 
-               booking.getStatus() != BookingStatus.COMPLETED){
-                currentBookings.add(new BookingResponseDTO(
-                        booking.getBookingId(),
-                        booking.getRoom().getRoomId(),
-                        booking.getBookingEnter(),
-                        booking.getBookingOut(),
-                        booking.getClient().getClientId(),
-                        booking.getStatus(),
-                        booking.getAdvancedPayment(),
-                        booking.getTotalPrice(),
-                        booking.getPenalty()));
-                
-                
+            if(booking.getStatus() != BookingStatus.CANCELED &&
+               booking.getStatus() != BookingStatus.COMPLETED &&
+               booking.getStatus() != BookingStatus.EXPIRED){
+                currentBookings.add(toResponse(booking));
             }
           }
         return currentBookings;
     }
-        
+
+    private BookingResponseDTO toResponse(Booking booking) {
+        return new BookingResponseDTO(
+                booking.getBookingId(),
+                booking.getRoom().getRoomId(),
+                booking.getRoom().getRoomNumber(),
+                booking.getBookingEnter(),
+                booking.getBookingOut(),
+                booking.getClient().getClientId(),
+                booking.getStatus(),
+                booking.getAdvancedPayment(),
+                booking.getTotalPrice(),
+                booking.getPenalty(),
+                booking.getPaymentMethod(),
+                booking.getPaymentStatus());
+    }
+
     }

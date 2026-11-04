@@ -60,6 +60,14 @@ public class Booking {
     @Column(name="status")
     private BookingStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_method", length = 10)
+    private PaymentMethod paymentMethod;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_status", nullable = false, length = 20)
+    private PaymentStatus paymentStatus = PaymentStatus.NOT_REQUIRED;
+
     public Booking() {
     }
 
@@ -151,7 +159,21 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
 
-        
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
     
     
 }

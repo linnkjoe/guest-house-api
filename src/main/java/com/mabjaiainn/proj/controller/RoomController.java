@@ -4,6 +4,8 @@
  */
 package com.mabjaiainn.proj.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import com.mabjaiainn.proj.exception.BusinessException;
 import com.mabjaiainn.proj.entity.Room;
 import com.mabjaiainn.proj.service.RoomService;
 import jakarta.validation.Valid;
@@ -33,22 +35,26 @@ public class RoomController {
         this.roomService = roomService;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','GESTOR')")
     @GetMapping("/rooms")
     public List<Room> retrieveRooms() {
         return roomService.retrieveAllRooms();
     }
     
+    @PreAuthorize("hasAnyRole('ADMIN','GESTOR')")
     @GetMapping("/rooms/{id}")
     public EntityModel retrieveRoomById(@PathVariable Long id){
         return roomService.findRoomById(id);
     }
     
-    @GetMapping("/rooms/avalable")
+    @PreAuthorize("hasAnyRole('ADMIN','GESTOR')")
+    @GetMapping({"/rooms/available", "/rooms/avalable"})
     public List<Room> retrieveAvalableRooms(){
         return roomService.retriveAvalableRooms();
     }
 
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/rooms")
     public ResponseEntity<Room> createRoom(@Valid @RequestBody Room room){
     
@@ -57,27 +63,32 @@ public class RoomController {
         
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/room")
     public Room updateRoom(@Valid @RequestBody Room room){
         return roomService.updateRoom(room);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/{id}/clean")
-    public void startCleaning(@PathVariable Long id){
+    public void startCleaning(@PathVariable Long id) throws BusinessException {
         roomService.startCleaning(id);
     }
     
-    @PatchMapping("/{id}/avalable")
-    public ResponseEntity<Room> markRoomAsAvalable(@PathVariable Long id){
+    @PreAuthorize("hasRole('ADMIN')")
+    @PatchMapping({"/{id}/available", "/{id}/avalable"})
+    public ResponseEntity<Room> markRoomAsAvalable(@PathVariable Long id) throws BusinessException {
         return roomService.markRoomAsAvalable(id);
     }
     
-    @PatchMapping("/{id}/maintence")
-    public ResponseEntity<Room> markRoomAsMaintencce(@PathVariable Long id){
+    @PreAuthorize("hasRole('ADMIN')")
+    @PatchMapping({"/{id}/maintenance", "/{id}/maintence"})
+    public ResponseEntity<Room> markRoomAsMaintencce(@PathVariable Long id) throws BusinessException {
         return roomService.markRoomAsMaintence(id);
     }
     
-    @GetMapping("/rooms/ocupied")
+    @PreAuthorize("hasAnyRole('ADMIN','GESTOR')")
+    @GetMapping({"/rooms/occupied", "/rooms/ocupied"})
     public List<Room> retrieveOcupiedRooms(){
         return roomService.getOcupiedRooms();
     }

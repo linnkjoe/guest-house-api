@@ -4,6 +4,7 @@
  */
 package com.mabjaiainn.proj.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import com.mabjaiainn.proj.DTO.MonthlyRevenueReportDTO;
 import com.mabjaiainn.proj.service.ReportService;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,8 @@ public class ReportController {
         this.reportService = reportService;
     }
     
-    @GetMapping("/reveneu")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping({"/revenue", "/reveneu"})
     public ResponseEntity<MonthlyRevenueReportDTO> getReveneuReport(
     @RequestParam int year, @RequestParam int month
     ){

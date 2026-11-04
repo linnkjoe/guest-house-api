@@ -9,5 +9,5 @@ package com.mabjaiainn.proj.entity;
  * @author linnkjoe
  */
 public enum BookingStatus {
-    RESERVED, CHECKED_IN, CANCELED, COMPLETED
+    RESERVED, CHECKED_IN, CANCELED, COMPLETED, EXPIRED
 }

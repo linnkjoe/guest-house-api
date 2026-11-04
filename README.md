@@ -17,6 +17,7 @@ A RESTful API for managing a Guest House, built with **Java 26** and **Spring Bo
 - 📖 Interactive API Documentation with Swagger/OpenAPI
 - 🧪 Unit Testing with JUnit 5 & Mockito
 - 🌐 RESTful API Architecture
+- 🔐 Authentication (JWT) and role-based authorization with Spring Security (ADMIN, GESTOR, CLIENTE)
 
 ---
 
@@ -123,14 +124,57 @@ http://localhost:8080/v3/api-docs
 
 ---
 
+## 🔐 Security
+
+Authentication is stateless: `POST /auth/login` with `{"username": "...", "password": "..."}` returns a JWT (`token`, `role`, `clientId`, ...). Send it on every request as `Authorization: Bearer <token>`. Authorization is declared per endpoint with `@PreAuthorize` in each controller.
+
+**Setup**
+
+1. Run the required database scripts once in Oracle: `database/security-schema.sql` for a new security schema, `database/manager-account-enabled-migration.sql` if upgrading manager accounts, `database/manager-first-login-password-migration.sql` to enable forced first-login password changes, `database/booking-prepayment-migration.sql` to add booking expiry/payment fields, `database/pack-catalog-image-promotion-migration.sql` to add package request counts, discounts, and image storage, `database/about-page-migration.sql` to create the editable About page, `database/contact-messages-migration.sql` for the client-to-staff message inbox, `database/contact-message-replies-migration.sql` to enable subject conversations with replies from both sides, `database/staff-contact-message-migration.sql` to allow staff-initiated conversations, and `database/staff-username-domain-migration.sql` to update existing Admin/Gestor usernames. Run contact migrations after the base contact-messages migration, in the order listed. Check and resolve username collisions before running the staff username migration. The project uses `ddl-auto=validate`.
+2. Optionally set `JWT_SECRET` (32+ characters) and `BOOTSTRAP_ADMIN_PASSWORD`. If the admin password is not set, the first `ADMIN` (`admin@mbj.inn`) is created at startup with a random password written once to the log. Bootstrap usernames without a domain are automatically given the `@mbj.inn` suffix; configured usernames with a different domain are rejected.
+3. Existing clients get a login account at startup (e-mail + their current password, now stored as a BCrypt hash).
+4. In Swagger UI, call `/auth/login`, then use **Authorize** with the token.
+
+**Accounts:** Admin and Gestor usernames must end in `@mbj.inn` (case-insensitive when created; stored in lowercase); the database migration updates existing staff usernames, which should then sign in using the new username. `ADMIN` creates managers with `POST /users`; the API generates a temporary password, returned once in the create response. The manager must change it at first login, and other API operations remain blocked until the password is changed. New administrator accounts use a password and confirmation supplied by the creating admin. `CLIENTE` accounts are created together with the client in `POST /clients` or via self-registration; both flows require password confirmation and continue to use their normal personal e-mail addresses.
+
+**Who can call what**
+
+| Endpoint | ADMIN | GESTOR | CLIENTE |
+|----------|:-----:|:------:|:-------:|
+| `POST /auth/login` | public | public | public |
+| `GET/POST /users` | ✅ | ❌ | ❌ |
+| `PATCH /users/{id}/enabled` (manager accounts only) | ✅ | ❌ | ❌ |
+| `PUT /users/me/password` | ✅ | ✅ | ✅ |
+| `GET /api/v1/reports/revenue` (`/reveneu` legacy alias) | ✅ | ❌ | ❌ |
+| `GET /clients`, `POST /clients`, `DELETE /clients/{id}` | ✅ | ✅ | ❌ |
+| `GET /clients/{id}` | ✅ | ✅ | own record |
+| `GET /bookings`, `GET /future-bookings` | ✅ | ✅ | ❌ |
+| `POST /{id}/check-in`, `/{id}/check-out` | ✅ | ✅ | ❌ |
+| `POST /{id}/extend/{newCheckOut}` | ✅ | ✅ | own bookings |
+| `POST /booking/{clientId}/{packId}` | ✅ | ✅ | only for own `clientId` |
+| `GET /{id}/booking`, `POST /{id}/cancel` | ✅ | ✅ | own bookings |
+| `GET /client/{id}/bookings`, `/client/{id}/bookings-current` | ✅ | ✅ | own `id` |
+| `GET /packs`, `GET /packs/{id}` | ✅ | ✅ | ✅ |
+| `POST /packs`, `DELETE /packs/{id}` | ✅ | ❌ | ❌ |
+| `GET /rooms/available` (`/avalable` legacy alias) | ✅ | ✅ | ✅ |
+| `GET /rooms`, `GET /rooms/{id}`, `GET /rooms/occupied` (`/ocupied` legacy alias) | ✅ | ✅ | ❌ |
+| `POST /rooms`, `PUT /update/room`, `PATCH /{id}/clean`, `/{id}/available`, `/{id}/maintenance` | ✅ | ❌ | ❌ |
+
+Responses: `401` without a valid token, `403` when the role (or ownership) is not allowed.
+
+---
+
 ## 📖 Booking Workflow
 
-1. Create a booking.
-2. The system validates room availability.
-3. Perform guest check-in.
-4. Perform guest check-out.
-5. The room enters the cleaning state.
-6. After the cleaning period, the room automatically becomes available again.
+1. A client chooses a stay and a simulated payment method (card, M-Pesa or e-Mola). The API records the existing 50% advance payment and selected method; this is a demo only and does not contact a payment provider or collect payment credentials.
+2. The system assigns an available room and marks the booking `RESERVED`; cancelled bookings no longer block availability.
+3. A booking remains `RESERVED` until staff explicitly confirms check-in with `POST /{id}/check-in`; that action moves it to `CHECKED_IN` and the room to `OCUPADO`.
+4. If no check-in happened by the planned checkout time, the scheduled workflow marks the booking `EXPIRED` and releases the room when no other active booking needs it.
+5. Perform guest check-out; the room enters `EM_LIMPEZA` for 30 minutes.
+6. After cleaning, the scheduled workflow returns it to `DISPONIVEL`, or to `RESERVADO` when another active booking is assigned.
+7. Staff can extend an active booking with `POST /{id}/extend/{newCheckOut}`; the API checks room conflicts and charges the configured extra-hour rate.
+
+Booking response DTOs include both the internal `roomId` and the visible `roomNumber`. Display the room number in user-facing tables; keep `roomId` for API operations and relationships.
 
 ---
 
@@ -162,7 +206,6 @@ Computer Science Student | Java Backend Developer
 
 ## 🚀 Future Improvements
 
-- Authentication and Authorization with Spring Security & JWT
 - Docker support
 - CI/CD pipeline
 - Integration tests
@@ -172,3 +215,32 @@ Computer Science Student | Java Backend Developer
 ---
 
 ⭐ Feel free to contribute, open issues, or suggest improvements!
+
+
+## Auto cadastro, extras e estadias personalizadas
+
+Executar `database/packs-customization-schema.sql` uma vez antes de arrancar (o projecto usa `ddl-auto=validate`).
+Em instalacoes existentes, executar tambem `database/pack-catalog-image-promotion-migration.sql` para ativar contagem de pedidos, descontos promocionais e fotografias dos pacotes.
+Executar `database/about-page-migration.sql` para criar a pagina Sobre nos com o endereco e contacto Mabjaia Inn predefinidos; o Admin pode atualizar o texto, os dados de contacto e a fotografia na aplicacao.
+Executar tambem `database/contact-messages-migration.sql` para permitir que clientes autenticados enviem mensagens e que Admin/Gestor as respondam.
+Executar `database/contact-message-replies-migration.sql` depois da migração anterior para organizar mensagens por assunto e permitir respostas de ida e volta entre cliente e equipa; as respostas existentes são preservadas.
+Executar `database/staff-contact-message-migration.sql` depois das migrações de mensagens para habilitar o contacto iniciado pela equipa a partir das listas de reservas e clientes.
+O pacote `Demo - Aviso de checkout` é criado automaticamente. Para testar o alerta sem esperar uma hora, faça uma reserva e check-in com esse pacote; depois ajuste apenas a reserva de teste no Oracle para checkout em 13 minutos: `UPDATE BOOKING SET BOOKING_OUT = SYSTIMESTAMP + INTERVAL '13' MINUTE WHERE BOOKING_ID = <ID_DA_RESERVA> AND STATUS = 'CHECKED_IN'; COMMIT;`. O aviso deve surgir quando faltarem 10 minutos, aproximadamente 3 minutos depois do ajuste. Faça o check-out da reserva de teste para libertar o quarto.
+Em instalacoes existentes, executar `database/staff-username-domain-migration.sql` para atualizar os utilizadores Admin/Gestor para o dominio `@mbj.inn`; resolver colisões antes da migração. Os clientes continuam a usar os seus e-mails pessoais.
+No primeiro arranque são criados os extras (ar condicionado, piscina, atendimento VIP) e as estadias **Summer** e **VIP Stay**; os preços ajustam-se na aplicação.
+
+| Endpoint | Admin | Gestor | Cliente |
+|---|---|---|---|
+| `POST /auth/register`, `GET /auth/email-available` | público | público | público |
+| `POST /users` (gestores/admins) | ✅ | ❌ | ❌ |
+| `POST /clients` | ✅ | ✅ | ❌ |
+| `POST /packs`, `PUT /packs/{id}` | ✅ | ✅ | ❌ |
+| `DELETE /packs/{id}` | ✅ | ❌ | ❌ |
+| `GET /features` | todos | todos | só ativos |
+| `POST/PUT /features` | ✅ | ✅ | ❌ |
+| `DELETE /features/{id}` | ✅ | ❌ | ❌ |
+| `POST /custom-packs/quote` | ✅ | ✅ | ✅ |
+| `/clients/{id}/custom-packs` (GET/POST/PUT/DELETE) | ✅ | ✅ | só o próprio |
+| `POST /booking/{clientId}/custom/{customId}` | ✅ | ✅ | só o próprio |
+
+Preço personalizado = estadia mais barata + extras que ela não inclui + horas adicionais × `app.pricing.extra-hour-rate`.
