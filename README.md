@@ -1,5 +1,13 @@
 # 🏨 Guest House API
 
+![Java](https://img.shields.io/badge/Java-26-orange)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.1-brightgreen)
+![Oracle](https://img.shields.io/badge/Database-Oracle-red)
+![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green)
+![JUnit5](https://img.shields.io/badge/JUnit-5-success)
+![Mockito](https://img.shields.io/badge/Mockito-Test-blue)
+![Maven](https://img.shields.io/badge/Maven-Build-red)
+
 A RESTful API for managing a Guest House, built with **Java 26** and **Spring Boot**. This project provides a backend solution for managing guests, rooms, accommodation packages, and bookings while enforcing business rules for room availability, check-in, check-out, and cleaning periods.
 
 ## 🚀 Features
@@ -77,8 +85,8 @@ Update the `application.properties` file:
 
 ```properties
 spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
-spring.datasource.username=your_username
-spring.datasource.password=your_password
+spring.datasource.username=username
+spring.datasource.password=password
 
 spring.jpa.hibernate.ddl-auto=update
 ```
@@ -178,6 +186,37 @@ Booking response DTOs include both the internal `roomId` and the visible `roomNu
 
 ---
 
+## 📸 API Documentation Preview
+
+### Swagger UI Home
+
+![Swagger Home](images/swagger-home.PNG)
+
+---
+
+### Booking Endpoints
+
+![Booking Endpoints](images/swagger-bookings.PNG)
+
+---
+
+### Create Booking
+
+![Create Booking](images/swagger-create-booking.PNG)
+
+---
+
+### API Response Example
+
+![API Response](images/swagger-response.PNG)
+
+---
+
+### Database Schema
+
+![Schemas](images/oracle-schema.PNG)
+
+
 ## 🧪 Running Tests
 
 Execute the test suite:
@@ -186,7 +225,7 @@ Execute the test suite:
 mvn test
 ```
 
-The project includes unit tests covering the service layer using:
+The project includes **14 unit tests** covering the service layer using:
 
 - **JUnit 5** for test execution.
 - **Mockito** for dependency mocking and business logic isolation.
@@ -200,9 +239,10 @@ The project includes unit tests covering the service layer using:
 Computer Science Student | Java Backend Developer
 
 - GitHub: https://github.com/linnkjoe
-- LinkedIn: *(Add your LinkedIn profile here)*
+- LinkedIn: https://www.linkedin.com/in/linnkjoe/
 
 ---
+
 
 ## 🚀 Future Improvements
 
