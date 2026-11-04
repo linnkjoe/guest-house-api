@@ -6,6 +6,7 @@ package com.mabjaiainn.proj.DTO;
 
 import java.math.BigDecimal;
 import java.time.YearMonth;
+import java.util.List;
 
 /**
  *
@@ -15,6 +16,8 @@ public record MonthlyRevenueReportDTO (
         YearMonth month,
         Long totalBookings,
         BigDecimal totalRevenue,
-        BigDecimal totalPenalties
+        BigDecimal totalPenalties,
+        List<TopClientReportDTO> bestClients,
+        List<TopPackageReportDTO> mostReservedPackages
  )
 {}

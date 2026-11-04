@@ -284,3 +284,18 @@ No primeiro arranque são criados os extras (ar condicionado, piscina, atendimen
 | `POST /booking/{clientId}/custom/{customId}` | ✅ | ✅ | só o próprio |
 
 Preço personalizado = estadia mais barata + extras que ela não inclui + horas adicionais × `app.pricing.extra-hour-rate`.
+# Login Google
+
+O Google usa o fluxo OAuth 2.0 Authorization Code; o segredo do cliente fica apenas no backend.
+
+1. Crie um OAuth Client ID do tipo **Web application** no Google Cloud Console.
+2. Em **Authorized JavaScript origins**, adicione `http://localhost:5173`.
+3. Em **Authorized redirect URIs**, adicione exatamente `http://localhost:5173/backend/auth/google/callback`.
+4. Configure `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` e `GOOGLE_REDIRECT_URI` no ficheiro `.env` na raiz deste projeto. O Spring Boot carrega-o ao iniciar a API. Nunca coloque o segredo no frontend nem versione o `.env` ou o JSON de credenciais.
+5. Use `GOOGLE_REDIRECT_URI=http://localhost:5173/backend/auth/google/callback` e `GOOGLE_FRONTEND_REDIRECT_URI=http://localhost:5173/`. Para produção, atualize as URLs para os domínios HTTPS públicos; o URI de redirecionamento no Google e `GOOGLE_REDIRECT_URI` devem corresponder exatamente.
+
+O backend valida state, nonce, assinatura, emissor, audiência, validade e e-mail verificado do token Google. Novos clientes informam o telefone após o retorno OAuth. Contas Admin e Manager continuam a usar a autenticação normal por palavra-passe.
+
+### Cadastro por e-mail
+
+No cadastro tradicional, a API envia um código de seis algarismos ao e-mail indicado. A conta só é criada e autenticada depois da confirmação; o código expira em 10 minutos e aceita até cinco tentativas. Configure o SMTP no `.env` do backend usando `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD` e `MAIL_FROM` (veja `.env.example`). No Gmail, use uma palavra-passe de aplicação, não a palavra-passe normal da conta, e remova os espaços de formatação. `MAIL_FROM` deve ser a conta autenticada ou um alias autorizado pelo provedor. O segredo SMTP deve permanecer apenas no backend.

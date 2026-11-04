@@ -3,6 +3,7 @@ package com.mabjaiainn.proj.service;
 import com.mabjaiainn.proj.DTO.LoginRequest;
 import com.mabjaiainn.proj.DTO.LoginResponse;
 import com.mabjaiainn.proj.DTO.AuthUserDetails;
+import com.mabjaiainn.proj.entity.Role;
 import com.mabjaiainn.proj.repository.AppUserRepository;
 import java.time.Duration;
 import java.time.Instant;
@@ -50,8 +51,20 @@ public class AuthService {
             throw new BadCredentialsException(INVALID_CREDENTIALS);
         }
 
-        Long clientId = user.clientId();
+        return createSession(user);
+    }
 
+    public LoginResponse loginWithGoogle(String email) {
+        String username = email.trim().toLowerCase();
+        AuthUserDetails user = appUserRepository.findAuthDetailsByUsername(username).orElse(null);
+        if (user == null || !user.enabled() || user.role() != Role.CLIENTE || user.clientId() == null) {
+            throw new BadCredentialsException(INVALID_CREDENTIALS);
+        }
+        return createSession(user);
+    }
+
+    private LoginResponse createSession(AuthUserDetails user) {
+        Long clientId = user.clientId();
         Instant now = Instant.now();
         JwtClaimsSet.Builder claims = JwtClaimsSet.builder()
                 .issuer("mabjaia-inn-api")

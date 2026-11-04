@@ -1,8 +1,10 @@
 com\mabjaiainn\proj\repository\PackFeatureRepository.class
 com\mabjaiainn\proj\DTO\ChangePasswordRequest.class
 com\mabjaiainn\proj\DTO\QuoteResponse.class
+com\mabjaiainn\proj\service\GoogleAuthService$GoogleCredentials.class
 com\mabjaiainn\proj\DTO\LoginRequest.class
 com\mabjaiainn\proj\repository\ClientRepository.class
+com\mabjaiainn\proj\service\EmailVerificationService$PendingRegistration.class
 com\mabjaiainn\proj\repository\BookingRepository.class
 com\mabjaiainn\proj\controller\UserController.class
 com\mabjaiainn\proj\service\PricingService.class
@@ -12,6 +14,7 @@ com\mabjaiainn\proj\exception\BusinessException.class
 com\mabjaiainn\proj\service\RoomService.class
 com\mabjaiainn\proj\service\RoomScheduler.class
 com\mabjaiainn\proj\DTO\ClientResponseDTO.class
+com\mabjaiainn\proj\DTO\GoogleAuthResponse.class
 com\mabjaiainn\proj\repository\AboutPageImageRepository.class
 com\mabjaiainn\proj\security\SecurityDataInitializer.class
 com\mabjaiainn\proj\repository\PacksRepository.class
@@ -26,6 +29,7 @@ com\mabjaiainn\proj\DTO\PackRequest.class
 com\mabjaiainn\proj\entity\PaymentMethod.class
 com\mabjaiainn\proj\service\CustomPackService.class
 com\mabjaiainn\proj\repository\AppUserRepository.class
+com\mabjaiainn\proj\service\ReportService$PackageTotals.class
 com\mabjaiainn\proj\controller\AuthController.class
 com\mabjaiainn\proj\DTO\SetUserEnabledRequest.class
 com\mabjaiainn\proj\DTO\RoomResponseDTO.class
@@ -38,8 +42,11 @@ com\mabjaiainn\proj\DTO\CustomBookingRequest.class
 com\mabjaiainn\proj\DTO\EmailAvailability.class
 com\mabjaiainn\proj\controller\CustomPackController.class
 com\mabjaiainn\proj\entity\AboutPageContent.class
+com\mabjaiainn\proj\service\EmailVerificationService.class
 com\mabjaiainn\proj\entity\BookingStatus.class
+com\mabjaiainn\proj\DTO\EmailVerificationRequest.class
 com\mabjaiainn\proj\controller\BookingController.class
+com\mabjaiainn\proj\service\GoogleAuthService$GoogleTokenResponse.class
 com\mabjaiainn\proj\DTO\AuthUserDetails.class
 com\mabjaiainn\proj\DTO\ContactMessageResponse.class
 com\mabjaiainn\proj\DTO\CustomPackResponse.class
@@ -53,6 +60,7 @@ com\mabjaiainn\proj\exception\CostumizedResponseEntityExceptionHandler.class
 com\mabjaiainn\proj\exception\ErrorDetails.class
 com\mabjaiainn\proj\service\ClientService.class
 com\mabjaiainn\proj\service\PackService$ValidatedImage.class
+com\mabjaiainn\proj\service\GoogleAuthService$PendingIdentity.class
 com\mabjaiainn\proj\DTO\SetClientEnabledRequest.class
 com\mabjaiainn\proj\service\BookingService.class
 com\mabjaiainn\proj\DTO\RegisterRequest.class
@@ -65,7 +73,9 @@ com\mabjaiainn\proj\service\AuthService.class
 com\mabjaiainn\proj\controller\AboutPageController.class
 com\mabjaiainn\proj\repository\CustomPackageRepository.class
 com\mabjaiainn\proj\DTO\ContactMessageRequest.class
+com\mabjaiainn\proj\DTO\GoogleOAuthCompleteRequest.class
 com\mabjaiainn\proj\entity\Room.class
+com\mabjaiainn\proj\service\GoogleAuthService.class
 com\mabjaiainn\proj\DTO\UserResponseDTO.class
 com\mabjaiainn\proj\DTO\ContactMessageReplyResponse.class
 com\mabjaiainn\proj\repository\ContactMessageRepository.class
@@ -83,6 +93,7 @@ com\mabjaiainn\proj\service\PackFeatureService.class
 com\mabjaiainn\proj\service\UserService.class
 com\mabjaiainn\proj\security\OpenApiConfiguration.class
 com\mabjaiainn\proj\service\AboutPageService.class
+com\mabjaiainn\proj\DTO\TopPackageReportDTO.class
 com\mabjaiainn\proj\exception\SourceNotFound.class
 com\mabjaiainn\proj\service\ReportService.class
 com\mabjaiainn\proj\security\JwtConfiguration.class
@@ -94,6 +105,8 @@ com\mabjaiainn\proj\DTO\CustomPackRequest.class
 com\mabjaiainn\proj\service\PackService.class
 com\mabjaiainn\proj\security\CatalogDataInitializer.class
 com\mabjaiainn\proj\entity\PaymentStatus.class
+com\mabjaiainn\proj\DTO\TopClientReportDTO.class
 com\mabjaiainn\proj\controller\RoomController.class
 com\mabjaiainn\proj\ProjApplication.class
+com\mabjaiainn\proj\service\ReportService$ClientTotals.class
 com\mabjaiainn\proj\DTO\CreateUserResponse.class

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.mabjaiainn.proj.exception.BusinessException;
 
 /**
  *
@@ -30,7 +31,7 @@ public class ReportController {
     @GetMapping({"/revenue", "/reveneu"})
     public ResponseEntity<MonthlyRevenueReportDTO> getReveneuReport(
     @RequestParam int year, @RequestParam int month
-    ){
+    ) throws BusinessException {
     return ResponseEntity.ok(reportService.generateMonthlyReposrt(year, month));
     }
 }

@@ -44,8 +44,10 @@ public class SpringSecurityConfiguration {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/login", "/auth/register", "/auth/email-available", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/packs/*/image", "/about", "/about/image").permitAll()
+                .requestMatchers("/auth/login", "/auth/register", "/auth/register/verify", "/auth/google/start",
+                        "/auth/google/callback", "/auth/google/complete", "/auth/email-available",
+                        "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/packs", "/packs/*/image", "/about", "/about/image").permitAll()
                 .anyRequest().access((authentication, context) -> {
                     var currentAuthentication = authentication.get();
                     if (currentAuthentication == null || !currentAuthentication.isAuthenticated()

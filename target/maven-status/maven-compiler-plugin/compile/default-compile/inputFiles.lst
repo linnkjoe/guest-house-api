@@ -27,7 +27,10 @@ C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guest
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\CustomPackRequest.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\CustomPackResponse.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\EmailAvailability.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\EmailVerificationRequest.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\FeatureRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\GoogleAuthResponse.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\GoogleOAuthCompleteRequest.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\LoginRequest.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\LoginResponse.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\MonthlyRevenueReportDTO.java
@@ -38,6 +41,8 @@ C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guest
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\RoomResponseDTO.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\SetClientEnabledRequest.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\SetUserEnabledRequest.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\TopClientReportDTO.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\TopPackageReportDTO.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\DTO\UserResponseDTO.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\AboutPageContent.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\entity\AboutPageImage.java
@@ -86,6 +91,8 @@ C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guest
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\ClientService.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\ContactMessageService.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\CustomPackService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\EmailVerificationService.java
+C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\GoogleAuthService.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\PackFeatureService.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\PackService.java
 C:\Users\linnkjoe\Documents\NetBeansProjects\Ambiente de Teste\Mabjaia Inn\guesthouse-fullstack-app (2)\guesthouse-fullstack-app\src\main\java\com\mabjaiainn\proj\service\PricingService.java

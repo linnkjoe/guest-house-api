@@ -83,7 +83,12 @@ public class ClientService {
 
     @Transactional
     public Client registerClient(Client client) throws BusinessException {
-        return persistClientAndAccount(client, client.getClientPassword(), false);
+        return persistClientAndAccount(client, client.getClientPassword(), false, false);
+    }
+
+    @Transactional
+    public Client registerClientWithEncodedPassword(Client client, String encodedPassword) throws BusinessException {
+        return persistClientAndAccount(client, encodedPassword, false, true);
     }
 
     /**
@@ -92,19 +97,20 @@ public class ClientService {
     @Transactional
     public CreateClientResponse createClientWithTemporaryPassword(Client client) throws BusinessException {
         String temporaryPassword = TemporaryPasswordGenerator.generate();
-        Client savedClient = persistClientAndAccount(client, temporaryPassword, true);
+        Client savedClient = persistClientAndAccount(client, temporaryPassword, true, false);
         return new CreateClientResponse(savedClient.getClientId(),
                 savedClient.getClientEmail().trim().toLowerCase(Locale.ROOT), temporaryPassword);
     }
 
-    private Client persistClientAndAccount(Client client, String password, boolean mustChangePassword)
+    private Client persistClientAndAccount(Client client, String password, boolean mustChangePassword,
+            boolean passwordIsEncoded)
             throws BusinessException {
         String username = client.getClientEmail().trim().toLowerCase(Locale.ROOT);
         if (appUserRepository.existsByUsername(username)) {
             throw new BusinessException("Email already registered");
         }
 
-        String hash = passwordEncoder.encode(password);
+        String hash = passwordIsEncoded ? password : passwordEncoder.encode(password);
         client.setClientId(null);
         client.setClientPassword(hash);
         Client savedClient = clientRepository.save(client);

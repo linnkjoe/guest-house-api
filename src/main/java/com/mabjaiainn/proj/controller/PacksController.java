@@ -39,7 +39,6 @@ public class PacksController {
         this.packService = packService;
     }
     
-    @PreAuthorize("hasAnyRole('ADMIN','GESTOR','CLIENTE')")
     @GetMapping("/packs")
     public List<Packs> retrieveAllPackages(){
         return packService.retrievePacks();

@@ -100,4 +100,34 @@ class AuthServiceTest {
 
         assertEquals(true, response.mustChangePassword());
     }
+
+    @Test
+    void googleAuthenticationIssuesASessionForAnEnabledClient() {
+        when(appUserRepository.findAuthDetailsByUsername("client@example.com"))
+                .thenReturn(Optional.of(new AuthUserDetails(
+                        "client@example.com", "stored-hash", "Client Name", Role.CLIENTE, 42L, true, false)));
+        when(jwtEncoder.encode(any(JwtEncoderParameters.class))).thenReturn(
+                Jwt.withTokenValue("google-session-token")
+                        .header("alg", "HS256")
+                        .issuedAt(Instant.now())
+                        .expiresAt(Instant.now().plusSeconds(3600))
+                        .build());
+
+        var response = authService.loginWithGoogle("Client@Example.com");
+
+        assertEquals("client@example.com", response.username());
+        assertEquals("CLIENTE", response.role());
+        assertEquals(42L, response.clientId());
+        assertEquals("google-session-token", response.token());
+    }
+
+    @Test
+    void googleAuthenticationCannotAuthenticateStaffAccounts() {
+        when(appUserRepository.findAuthDetailsByUsername("admin@example.com"))
+                .thenReturn(Optional.of(new AuthUserDetails(
+                        "admin@example.com", "stored-hash", "Admin", Role.ADMIN, null, true, false)));
+
+        assertThrows(BadCredentialsException.class,
+                () -> authService.loginWithGoogle("admin@example.com"));
+    }
 }
