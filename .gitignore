@@ -3,7 +3,14 @@ target/
 .env
 .env.*
 !.env.example
-client_secret_*.json
+client_secret*.json
+credentials*.json
+*.pem
+*.key
+*.p12
+*.jks
+application-local.properties
+application-prod.properties
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

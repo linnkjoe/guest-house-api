@@ -5,8 +5,6 @@ import com.mabjaiainn.proj.entity.Client;
 import com.mabjaiainn.proj.entity.Role;
 import com.mabjaiainn.proj.repository.AppUserRepository;
 import com.mabjaiainn.proj.repository.ClientRepository;
-import java.security.SecureRandom;
-import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -57,21 +55,13 @@ public class SecurityDataInitializer implements ApplicationRunner {
             return;
         }
         String username = TeamUsername.normalizeBootstrapUsername(adminUsername);
-        String password = adminPassword;
-        boolean generated = password == null || password.isBlank();
-        if (generated) {
-            byte[] bytes = new byte[12];
-            new SecureRandom().nextBytes(bytes);
-            password = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+        if (adminPassword == null || adminPassword.isBlank()) {
+            throw new IllegalStateException(
+                    "BOOTSTRAP_ADMIN_PASSWORD must be set before creating the first admin account");
         }
-        appUserRepository.save(new AppUser(username, passwordEncoder.encode(password),
+        appUserRepository.save(new AppUser(username, passwordEncoder.encode(adminPassword),
                 "Administrador", Role.ADMIN, null));
-        if (generated) {
-            log.warn("Primeiro ADMIN criado. utilizador='{}' palavra-passe='{}' (mostrada apenas agora; "
-                    + "defina BOOTSTRAP_ADMIN_PASSWORD para escolher a sua)", username, password);
-        } else {
-            log.info("Primeiro ADMIN criado com o utilizador '{}'", username);
-        }
+        log.info("Primeiro ADMIN criado com o utilizador '{}'", username);
     }
 
     private void createAccountsForExistingClients() {

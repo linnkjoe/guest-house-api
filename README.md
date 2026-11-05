@@ -1,6 +1,6 @@
 # 🏨 Motel API (Mabjaia Inn)
 
-A RESTful API for complete management of the **Mabjaia Inn** Guest House, built with **Java 26** and **Spring Boot**. The solution provides advanced features for customer and room management, static and custom accommodation packages, business rules for check-in/check-out, automated cleaning and expiration workflows, an internal message/support channel, JWT authentication, Google OAuth 2.0 integration, and email verification via SMTP.
+A RESTful API for complete management of the **Mabjaia Inn** Guest House, built with **Java 21** and **Spring Boot**. The solution provides advanced features for customer and room management, static and custom accommodation packages, business rules for check-in/check-out, automated cleaning and expiration workflows, an internal message/support channel, JWT authentication, Google OAuth 2.0 integration, and email verification via SMTP.
 
 ---
 
@@ -42,9 +42,9 @@ A RESTful API for complete management of the **Mabjaia Inn** Guest House, built 
 
 ## 🛠️ Tech Stack
 
-- **Language:** Java 26
+- **Language:** Java 21
 - **Framework:** Spring Boot, Spring Security, Spring Data JPA, Hibernate
-- **Database:** Oracle Database
+- **Database:** PostgreSQL
 - **Authentication & Security:** JWT (JSON Web Tokens), OAuth2 Client (Google), BCrypt
 - **Communication:** Spring Mail / SMTP
 - **Documentation:** Springdoc OpenAPI / Swagger UI
@@ -54,7 +54,7 @@ A RESTful API for complete management of the **Mabjaia Inn** Guest House, built 
 
 ## 🗄️ Database Model (Entity Relationship)
 
-The diagram below represents the complete and updated database structure of the system on **Oracle Database**:
+The diagram below represents the database structure used by the application:
 
 ![Database Entity Relationship Diagram](Untitled%20diagram-2026-11-04-132447.jpg)
 
@@ -64,9 +64,9 @@ The diagram below represents the complete and updated database structure of the 
 
 ### Prerequisites
 
-- **Java 26** installed and configured.
+- **Java 21** installed and configured.
 - **Maven 3.8+**
-- Running **Oracle Database** instance.
+- Running **PostgreSQL** instance.
 - Google Cloud Account with OAuth Client ID (optional for social login).
 - SMTP Server (e.g., Gmail App Password) for sending email verification codes.
 
@@ -77,54 +77,36 @@ git clone https://github.com/linnkjoe/guest-house-api.git
 cd guest-house-api
 ```
 
-### 2. Database Migrations & Scripts
+### 2. Local Configuration
 
-The project uses `spring.jpa.hibernate.ddl-auto=validate`. Execute the scripts in the following order inside your Oracle instance before running the application for the first time:
+Copy `.env.example` to `.env`, then set the PostgreSQL credentials and generate unique values for `JWT_SECRET` and `BOOTSTRAP_ADMIN_PASSWORD`. Never commit `.env` or real OAuth/SMTP credentials.
 
-1. `database/security-schema.sql` — Base schema for users, clients, and roles.
-2. `database/packs-customization-schema.sql` — Tables for stay customization and additional features.
-3. `database/manager-account-enabled-migration.sql` — Migration for manager account enablement.
-4. `database/manager-first-login-password-migration.sql` — Support for forced password update on first access.
-5. `database/booking-prepayment-migration.sql` — Pre-payment/deposit fields and reservation expiration deadlines.
-6. `database/pack-catalog-image-promotion-migration.sql` — Package metrics, photos, and discounts.
-7. `database/about-page-migration.sql` — Institutional About Us page structure.
-8. `database/contact-messages-migration.sql` — Contact messages inbox.
-9. `database/contact-message-replies-migration.sql` — Support for conversation threads and replies.
-10. `database/staff-contact-message-migration.sql` — Permission for staff-initiated conversations.
-11. `database/staff-username-domain-migration.sql` — Username migration for staff adhering to the `@mbj.inn` domain rule.
-
-### 3. Environment Variables (`.env`)
-
-Create or update the `.env` file at the root of your backend project with your credentials:
+If a credential was previously pushed to a public repository, revoke or rotate it; adding it to `.gitignore` does not remove it from Git history.
 
 ```properties
-# Oracle Database
-SPRING_DATASOURCE_URL=jdbc:oracle:thin:@localhost:1521:xe
-SPRING_DATASOURCE_USERNAME=your_user
-SPRING_DATASOURCE_PASSWORD=your_password
-
-# Authentication & JWT
-JWT_SECRET=YourSuperSecureSecretKeyThatIsAtLeast32CharactersLong
-BOOTSTRAP_ADMIN_PASSWORD=InitialAdminPassword123!
-
-# Google OAuth2 Integration
-GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=your-google-client-secret
-GOOGLE_REDIRECT_URI=http://localhost:5173/backend/auth/google/callback
-GOOGLE_FRONTEND_REDIRECT_URI=http://localhost:5173/
-
-# SMTP Server (Email / OTP Sending)
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USERNAME=your-email@gmail.com
-MAIL_PASSWORD=your-gmail-app-password
-MAIL_FROM=your-email@gmail.com
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/mabjaiainn
+SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_PASSWORD=<your-local-password>
+JWT_SECRET=<unique-random-value-of-at-least-32-bytes>
+BOOTSTRAP_ADMIN_PASSWORD=<unique-initial-admin-password>
 ```
+
+`DDL_AUTO=update` creates/updates tables from the JPA entities for a new database. For production schema evolution, use versioned PostgreSQL migrations rather than relying on automatic schema updates. Existing Oracle data and Oracle-specific SQL migrations are not converted automatically.
+
+### 3. Deploy on Render
+
+1. Create a persistent PostgreSQL database on Render.
+2. Create a **Web Service** from this repository and select **Docker** as the runtime. Set the service root to the backend project directory and the Dockerfile path to `Dockerfile`.
+3. Configure the service environment variables from `.env.example`. Set `SPRING_DATASOURCE_URL` to the PostgreSQL **internal** JDBC URL (`jdbc:postgresql://<internal-host>:5432/<database>`), plus the database username and password from Render. Do not paste credentials into source files.
+4. Generate a unique `JWT_SECRET` (at least 32 bytes) and set a strong `BOOTSTRAP_ADMIN_PASSWORD`. Configure `CORS_ALLOWED_ORIGINS` and OAuth redirect URLs with the deployed frontend/API URLs if those integrations are enabled.
+5. Keep `DDL_AUTO=update` for the first deployment to create the schema. Back up the database before future schema changes.
+
+The application listens on Render's `PORT` environment variable (default `8080`). A new PostgreSQL database starts empty; the first admin is created from the bootstrap environment variables. Do not reuse the Oracle database credentials or assume Oracle records have been migrated.
 
 ### 4. Run the Application
 
 ```bash
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 The API will be available at: `http://localhost:8080`

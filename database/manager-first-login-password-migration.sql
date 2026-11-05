@@ -1,7 +1,0 @@
--- Executar uma vez no schema da aplicacao antes de arrancar a versao atualizada.
-ALTER TABLE APP_USER ADD (
-    MUST_CHANGE_PASSWORD NUMBER(1,0) DEFAULT 0 NOT NULL
-);
-
-ALTER TABLE APP_USER ADD CONSTRAINT CK_APP_USER_PASSWORD_CHANGE
-    CHECK (MUST_CHANGE_PASSWORD IN (0, 1));
