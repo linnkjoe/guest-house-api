@@ -174,6 +174,9 @@ Test coverage includes:
 
 ## 📸 Screenshots
 
+### Oracle Schema - Overview
+![Diagram](images/Diagram.png)
+
 ### Swagger UI - Overview
 ![Swagger Home](images/swagger-home.PNG)
 
