@@ -103,6 +103,10 @@ BOOTSTRAP_ADMIN_PASSWORD=<unique-initial-admin-password>
 
 The application listens on Render's `PORT` environment variable (default `8080`). A new PostgreSQL database starts empty; the first admin is created from the bootstrap environment variables. Do not reuse the Oracle database credentials or assume Oracle records have been migrated.
 
+The Docker runtime uses the `Africa/Maputo` timezone for booking validation, scheduled tasks, and application-generated local timestamps.
+
+Email verification uses SMTP. Render Free web services block outbound ports 25, 465, and 587, so Gmail SMTP on port 587 cannot send from a Free service. Use a paid backend service plan that permits port 587, or integrate an email provider's HTTPS API. SMTP attempts are limited to 10 seconds, and the registration request reports a timeout instead of waiting indefinitely.
+
 ### 4. Run the Application
 
 ```bash

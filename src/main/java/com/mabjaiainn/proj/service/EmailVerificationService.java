@@ -67,7 +67,7 @@ public class EmailVerificationService {
         this.mailFrom = mailFrom == null ? "" : mailFrom.trim();
     }
 
-    public synchronized void sendVerificationCode(RegisterRequest request) throws BusinessException {
+    public void sendVerificationCode(RegisterRequest request) throws BusinessException {
         ensureMailConfigured();
         String email = normalizeEmail(request.clientEmail());
         if (appUserRepository.existsByUsername(email)) {

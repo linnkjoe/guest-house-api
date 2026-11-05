@@ -6,7 +6,8 @@ RUN mvn -B -DskipTests package
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
+ENV TZ=Africa/Maputo
 COPY --from=build /app/target/proj-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 USER 10001
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Duser.timezone=Africa/Maputo", "-jar", "app.jar"]
