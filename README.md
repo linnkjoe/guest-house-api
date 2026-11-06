@@ -56,7 +56,7 @@ A RESTful API for complete management of the **Mabjaia Inn** Guest House, built 
 
 The diagram below represents the database structure used by the application:
 
-![Database Entity Relationship Diagram](Untitled%20diagram-2026-11-04-132447.jpg)
+![Database Entity Relationship Diagram](images/Diagram.png)
 
 ---
 
@@ -177,9 +177,6 @@ Test coverage includes:
 ---
 
 ## 📸 Screenshots
-
-### Oracle Schema - Overview
-![Diagram](images/Diagram.png)
 
 ### Swagger UI - Overview
 ![Swagger Home](images/swagger-home.PNG)
