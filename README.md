@@ -195,7 +195,7 @@ Test coverage includes:
 ## 👨‍💻 Author
 
 **Nélio João Moanga**  
-Computer Science Student | Java / Spring Boot Backend Developer  
+Computer Science Student | Software Developer  
 Maputo, Mozambique  
 
 - **GitHub:** [linnkjoe](https://github.com/linnkjoe)  
